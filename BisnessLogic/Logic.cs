@@ -16,7 +16,17 @@ namespace BisnessLogic
         {
             DataBaseReader reader = new DataBaseReader();
             Questions = new List<Question>();
-           reader.GetQuestion(cnf.DataPath);
+            foreach (var q in reader.GetQuestion(cnf.DataPath))
+            {
+                Questions.Add(new Question()
+                { id = q.id,
+                question=q.question,
+                answerA=q.answerA,
+                answerB=q.answerB
+                });
+              
+            }
+          
         }
     }
 }
