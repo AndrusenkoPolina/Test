@@ -11,11 +11,10 @@ namespace DAL
     public class DataBaseReader
     { 
 
-        public List<Question> GetQuestion(SqlConnection sqc)
+        public List<Question> GetQuestion(string config)
         {
            List<Question> Questions = new List<Question>();
-
-            using (SqlConnection connection = new SqlConnection("Server=LENOVO-PC\\POLINA;Database=Question;Trusted_Connection=True;"))
+            using (SqlConnection connection = new SqlConnection(config))
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand("select q.id_question, question,answerA,answerB from question q inner join answerAB a ON a.id_question = q.id_question", connection);
@@ -31,8 +30,9 @@ namespace DAL
 
                     Questions.Add(q);
                 }
+                return Questions;
             }
-            return Questions;
+            
         }
     }
 }

@@ -13,12 +13,32 @@
 
     <Style x:Key="TextblockStyle" TargetType="TextBlock">
         <Setter Property="FontFamily" Value="/Test;component/#Bebas Neue Bold"/>
-        <Setter Property="FontSize" Value="30"/>
+        <Setter Property="FontSize" Value="40"/>
         <Setter Property="Foreground" Value="#4E504E"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="Padding" Value="5"></Setter>
     </Style>
+
+    <Style x:Key="TextBlockQuestion" TargetType="TextBlock" BasedOn="{StaticResource TextblockStyle}">
+        <Setter Property="FontSize" Value="30"/>
+    </Style>
+
+    <Style x:Key="TextBlockAnswer" TargetType="TextBlock" BasedOn="{StaticResource TextblockStyle}">
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="Padding" Value="0"/>
+    </Style>
+
+    <Style x:Key="StackPanelCommon" TargetType="StackPanel" >
+        <Setter Property="Background" Value="LightBlue"/>
+        <Setter Property="Margin" Value="150 10 150 10"/>
+        <Setter Property="Orientation" Value="Vertical"/>
+    </Style>
     
+    <Style x:Key="StackPanelElement" TargetType="StackPanel">
+        <Setter Property="Margin" Value="10"/>
+        <Setter Property="Orientation" Value="Horizontal"/>
+    </Style>
+
     <Style x:Key="ImageStyle" TargetType="Image">
         <Setter Property="Stretch" Value="Uniform"/>
         <Setter Property="Height" Value="70"></Setter>
@@ -42,6 +62,12 @@
         <Setter Property="Foreground" Value="#4E504E"/>
     </Style>
 
+    <Style x:Key="RadioButtonStyle" TargetType="RadioButton">
+        <Setter  Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="BorderBrush" Value="#4E504E"/>
+    </Style>
+    
     <ControlTemplate x:Key="TemplateButton" TargetType="Button">
         <Border   
               CornerRadius="10" 

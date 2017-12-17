@@ -25,21 +25,20 @@ namespace Test
             }
         }
 
-        public ObservableCollection<AnswerViewModel> Questions { get; set; }
+        public ObservableCollection<QuestionViewModel> Questions { get; set; }
 
 
         public QuestionsViewModel()
         {
             Config cnf = new Config();
-            cnf.DataPath = new SqlConnection("Server=LENOVO-PC\\POLINA;Database=Question;Trusted_Connection=True;");
-
+            cnf.DataPath = "Server=LENOVO-PC\\POLINA;Database=Question;Trusted_Connection=True;";
 
             Logic lg = new Logic(cnf);
-            Questions = new ObservableCollection<AnswerViewModel>();
+            Questions = new ObservableCollection<QuestionViewModel>();
 
             foreach (var q in lg.Questions)
             {
-                Questions.Add(new AnswerViewModel()
+                Questions.Add(new QuestionViewModel()
                 {
                     id = q.id,
                     question = q.question,

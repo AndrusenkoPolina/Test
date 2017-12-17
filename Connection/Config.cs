@@ -9,6 +9,6 @@ namespace Connection
 {
     public class Config
     {
-        public SqlConnection DataPath { get; set; }
+        public string DataPath { get; set; }
     }
 }

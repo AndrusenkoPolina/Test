@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Test
 {
-   public class AnswerViewModel
+   public class QuestionViewModel
     {
         public int id { get; set; }
         public string question { get; set; }
