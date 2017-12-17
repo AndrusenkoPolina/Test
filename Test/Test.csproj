@@ -117,6 +117,10 @@
       <Project>{231adf97-07ff-49cd-a590-db59700e90ba}</Project>
       <Name>BisnessLogic</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Connection\Connection.csproj">
+      <Project>{72b987ab-ddc8-419d-9836-b50bd6edfeed}</Project>
+      <Name>Connection</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
