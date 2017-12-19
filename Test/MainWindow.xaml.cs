@@ -24,6 +24,9 @@ namespace Test
         {
             InitializeComponent();
             DataContext = new QuestionsViewModel();
+            
         }
+
+       
     }
 }

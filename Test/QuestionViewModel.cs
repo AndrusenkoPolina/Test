@@ -12,5 +12,13 @@ namespace Test
         public string question { get; set; }
         public string answerA { get; set; }
         public string answerB { get; set; }
+
+        //public QuestionViewModel output(int count)
+        //{
+        //    QuestionViewModel qvm = new QuestionViewModel();
+        //    qvm.id = count;
+        //    return qvm;
+        //}
+       
     }
 }

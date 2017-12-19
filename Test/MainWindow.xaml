@@ -15,7 +15,9 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    
+    <Window.DataContext>
+        <local:QuestionsViewModel/>
+    </Window.DataContext>
     <DockPanel Background="{StaticResource MainBrush}">
             <TextBlock DockPanel.Dock="Top" Style="{StaticResource TextblockStyle}" Text="Тест на определение типа личности "/>
             <Grid DockPanel.Dock="Bottom">
@@ -34,8 +36,17 @@
                         </ToolTip>
                     </Image.ToolTip>
                 </Image>
-                <Button Grid.Column="1" Style="{StaticResource ButtonStyle}" Template="{StaticResource TemplateButton}" Content="Next"/>
-                <Button Grid.Column="2" Background="{StaticResource ButtonImageStatisticBrush}" Template="{StaticResource ResourceKey=TemplateButton}">
+            <Button Grid.Column="1" Style="{StaticResource ButtonStyle}" Template="{StaticResource TemplateButton}" Content="Next" 
+                    Command="{Binding ChooseQuestion}" CommandParameter="{Binding}" >
+                <Button.ToolTip >
+                    <ToolTip Style="{StaticResource TooltipStyle}">
+                       Следующие вопросы доступны только после ответа на предыдущие!
+                    </ToolTip>
+                </Button.ToolTip>
+            </Button>
+
+            <Button Grid.Column="2" Background="{StaticResource ButtonImageStatisticBrush}" Template="{StaticResource ResourceKey=TemplateButton}"
+                    >
                     <Button.ToolTip >
                         <ToolTip Style="{StaticResource TooltipStyle}">
                             <StackPanel Orientation="Vertical">
@@ -48,21 +59,22 @@
             </Grid>
         <ScrollViewer>
             <Grid>
-                <ItemsControl ItemsSource="{Binding Questions}">
+                <ItemsControl ItemsSource="{Binding SortQuestion}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-
-                            <StackPanel Style="{StaticResource StackPanelCommon}">
+                            <StackPanel Style="{StaticResource StackPanelCommon}" >
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text= "{Binding id}" Style="{StaticResource TextBlockQuestion}" />
                                     <TextBlock Text="{Binding question}" Style="{StaticResource TextBlockQuestion}"/>
                                 </StackPanel>
+
                                 <StackPanel Style="{StaticResource StackPanelElement}">
-                                    <RadioButton Style="{StaticResource RadioButtonStyle}"/>
+                                    <CheckBox  Style="{StaticResource CheckBoxStyle}" />
                                     <TextBlock Text="{Binding answerA}" Style="{StaticResource TextBlockAnswer}"/>
                                 </StackPanel>
+
                                 <StackPanel  Style="{StaticResource StackPanelElement}">
-                                    <RadioButton Style="{StaticResource RadioButtonStyle}"/>
+                                    <CheckBox  Style="{StaticResource CheckBoxStyle}"/>
                                     <TextBlock Text="{Binding answerB}" Style="{StaticResource  TextBlockAnswer}"/>
                                 </StackPanel>
                             </StackPanel>
