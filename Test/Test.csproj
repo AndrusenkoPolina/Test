@@ -59,6 +59,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="CheckAnswer.cs" />
     <Compile Include="OutputCommand.cs" />
     <Compile Include="QuestionViewModel.cs" />
     <Compile Include="App.xaml.cs">

@@ -11,6 +11,12 @@
     <ImageBrush x:Key="ButtonImageStatisticBrush" ImageSource="ButtonStatistic.png" Stretch="Uniform" >
     </ImageBrush>
 
+    <Style x:Key="GridStyle" TargetType="Grid">
+        <Setter Property="Background" Value="LightBlue"/>
+        <Setter Property="Margin" Value="100 0 100 0"/>
+    </Style>
+    
+    
     <Style x:Key="TextblockStyle" TargetType="TextBlock">
         <Setter Property="FontFamily" Value="/Test;component/#Bebas Neue Bold"/>
         <Setter Property="FontSize" Value="40"/>
@@ -26,12 +32,6 @@
     <Style x:Key="TextBlockAnswer" TargetType="TextBlock" BasedOn="{StaticResource TextblockStyle}">
         <Setter Property="FontSize" Value="20"/>
         <Setter Property="Padding" Value="0"/>
-    </Style>
-
-    <Style x:Key="StackPanelCommon" TargetType="StackPanel" >
-        <Setter Property="Background" Value="LightBlue"/>
-        <Setter Property="Margin" Value="150 10 150 10"/>
-        <Setter Property="Orientation" Value="Vertical"/>
     </Style>
 
     <Style x:Key="StackPanelElement" TargetType="StackPanel">
@@ -62,10 +62,11 @@
         <Setter Property="Foreground" Value="#4E504E"/>
     </Style>
 
-    <Style x:Key="CheckBoxStyle" TargetType="CheckBox">
-        <Setter  Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="BorderThickness" Value="2"/>
+    <Style x:Key="RadioButtonStyle" TargetType="RadioButton">
+        <Setter  Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="BorderThickness" Value="3"/>
         <Setter Property="BorderBrush" Value="#4E504E"/>
+        <Setter Property="Margin" Value="10"/>
     </Style>
     
     <ControlTemplate x:Key="TemplateButton" TargetType="Button">

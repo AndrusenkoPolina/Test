@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Test"
         mc:Ignorable="d"
-        Title="MainWindow" >
+        Title="Тест" >
 
     <Window.Resources>
         <ResourceDictionary>
@@ -20,61 +20,94 @@
     </Window.DataContext>
     <DockPanel Background="{StaticResource MainBrush}">
             <TextBlock DockPanel.Dock="Top" Style="{StaticResource TextblockStyle}" Text="Тест на определение типа личности "/>
-            <Grid DockPanel.Dock="Bottom">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Image Source="Button.png" Grid.Column="0" Style="{StaticResource ImageStyle}">
-                    <Image.ToolTip >
-                        <ToolTip Style="{StaticResource TooltipStyle}">
-                            <StackPanel Orientation="Vertical">
-                                <TextBlock>Тест на тип личности по Майерс-Бриггс</TextBlock>
-                                <TextBlock>Для определения как люди воспринимают мир и принимают решения</TextBlock>
-                            </StackPanel>
-                        </ToolTip>
-                    </Image.ToolTip>
-                </Image>
-            <Button Grid.Column="1" Style="{StaticResource ButtonStyle}" Template="{StaticResource TemplateButton}" Content="Next" 
-                    Command="{Binding ChooseQuestion}" CommandParameter="{Binding}" >
+        <Grid DockPanel.Dock="Bottom">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Image Source="Button.png" Grid.Column="0" Style="{StaticResource ImageStyle}">
+                <Image.ToolTip >
+                    <ToolTip Style="{StaticResource TooltipStyle}">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock>Тест на тип личности по Майерс-Бриггс</TextBlock>
+                            <TextBlock>Для определения как люди воспринимают мир и принимают решения</TextBlock>
+                        </StackPanel>
+                    </ToolTip>
+                </Image.ToolTip>
+            </Image>
+            <Button Grid.Column="1" Style="{StaticResource ButtonStyle}" Template="{StaticResource TemplateButton}" Content="{Binding ContentButton}" 
+                    Command="{Binding ChooseQuestion}" CommandParameter="{Binding}" 
+                    >
                 <Button.ToolTip >
                     <ToolTip Style="{StaticResource TooltipStyle}">
-                       Следующие вопросы доступны только после ответа на предыдущие!
+                        Следующие вопросы доступны только после ответа на предыдущие!
                     </ToolTip>
                 </Button.ToolTip>
             </Button>
 
             <Button Grid.Column="2" Background="{StaticResource ButtonImageStatisticBrush}" Template="{StaticResource ResourceKey=TemplateButton}"
                     >
-                    <Button.ToolTip >
-                        <ToolTip Style="{StaticResource TooltipStyle}">
-                            <StackPanel Orientation="Vertical">
-                                <TextBlock>Посмотреть подробную статистику в Exel</TextBlock>
-                                <TextBlock>Доступно только после прохождения теста</TextBlock>
-                            </StackPanel>
-                        </ToolTip>
-                    </Button.ToolTip>
-                </Button>
-            </Grid>
+                <Button.ToolTip >
+                    <ToolTip Style="{StaticResource TooltipStyle}">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock>Посмотреть подробную статистику в Exel</TextBlock>
+                            <TextBlock>Доступно только после прохождения теста</TextBlock>
+                        </StackPanel>
+                    </ToolTip>
+                </Button.ToolTip>
+            </Button>
+        </Grid>
+        
         <ScrollViewer>
-            <Grid>
-                <ItemsControl ItemsSource="{Binding SortQuestion}">
+            <Grid  Name="main" Style="{StaticResource GridStyle}" Visibility="{Binding GridVisibility}" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0"  >
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <RadioButton GroupName="que1" Grid.Row="1"  Style="{StaticResource RadioButtonStyle}" />
+                    <RadioButton GroupName="que1" Grid.Row="2" Style="{StaticResource RadioButtonStyle}"/>
+                    <RadioButton GroupName="que2" Grid.Row="4"  Style="{StaticResource RadioButtonStyle}" />
+                    <RadioButton GroupName="que2" Grid.Row="5" Style="{StaticResource RadioButtonStyle}"/>
+                    <RadioButton GroupName="que3" Grid.Row="7"  Style="{StaticResource RadioButtonStyle}" />
+                    <RadioButton GroupName="que3" Grid.Row="8" Style="{StaticResource RadioButtonStyle}"/>
+                    <RadioButton GroupName="que4" Grid.Row="10"  Style="{StaticResource RadioButtonStyle}" />
+                    <RadioButton GroupName="que4" Grid.Row="11" Style="{StaticResource RadioButtonStyle}"/>
+                    <RadioButton GroupName="que5" Grid.Row="13"  Style="{StaticResource RadioButtonStyle}" />
+                    <RadioButton GroupName="que5" Grid.Row="14" Style="{StaticResource RadioButtonStyle}"/>
+                </Grid>
+                    <ItemsControl ItemsSource="{Binding SortQuestion}" Grid.Column="1">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Style="{StaticResource StackPanelCommon}" >
+                            <StackPanel Orientation="Vertical">
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text= "{Binding id}" Style="{StaticResource TextBlockQuestion}" />
                                     <TextBlock Text="{Binding question}" Style="{StaticResource TextBlockQuestion}"/>
                                 </StackPanel>
 
                                 <StackPanel Style="{StaticResource StackPanelElement}">
-                                    <CheckBox  Style="{StaticResource CheckBoxStyle}" />
-                                    <TextBlock Text="{Binding answerA}" Style="{StaticResource TextBlockAnswer}"/>
+                                    <TextBlock Text="{Binding answerA}" Style="{StaticResource TextBlockAnswer}"  />
                                 </StackPanel>
 
                                 <StackPanel  Style="{StaticResource StackPanelElement}">
-                                    <CheckBox  Style="{StaticResource CheckBoxStyle}"/>
                                     <TextBlock Text="{Binding answerB}" Style="{StaticResource  TextBlockAnswer}"/>
                                 </StackPanel>
                             </StackPanel>

@@ -10,6 +10,7 @@ using BisnessLogic;
 using Connection;
 using System.Data.SqlClient;
 using System.Windows.Input;
+using System.Windows;
 
 namespace Test
 {
@@ -27,31 +28,21 @@ namespace Test
 
 
         public ObservableCollection<QuestionViewModel> Questions { get; set; }
-
-
         public ObservableCollection<QuestionViewModel> SortQuestion { get; set; }
-
-        public int count { get; set; }
-        public int Count
-        {
-            get { return count; }
-            set
-            {
-                count = value;
-                DoPropertyChanged("Count");
-            }
-        }
-
-
+        public string GridVisibility { get; set; }
+        public string ContentButton { get; set; }
+        public int[] answers { get; set; }
+        public int count {get; set; }
         public ICommand ChooseQuestion { get; set; }
+        public ICommand Check_Answer { get; set; }
 
         public QuestionsViewModel()
         {
-            
 
+            ChooseQuestion = new OutputCommand();
             Config cnf = new Config();
             cnf.DataPath = "Server=LENOVO-PC\\POLINA;Database=Question;Trusted_Connection=True;";
-
+            
             Logic lg = new Logic(cnf);
             
             Questions = new ObservableCollection<QuestionViewModel>();
@@ -67,7 +58,8 @@ namespace Test
                 });
 
             }
-            ChooseQuestion = new OutputCommand(count);
+            GridVisibility = "Collapsed";
+            ContentButton = "Начать тест!";
 
         }
 
