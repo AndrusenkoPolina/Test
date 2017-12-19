@@ -52,7 +52,7 @@
                 </Button.ToolTip>
             </Button>
         </Grid>
-        
+        <TextBlock Text="ПРИФ" Visibility="{Binding ResultVisibility}"/>
         <ScrollViewer>
             <Grid  Name="main" Style="{StaticResource GridStyle}" Visibility="{Binding GridVisibility}" >
                 <Grid.ColumnDefinitions>

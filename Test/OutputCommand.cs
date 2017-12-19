@@ -29,6 +29,11 @@ namespace Test
             //Выдача вопросов по COUNT штук   
             var sort = vmsort.Questions;
 
+            if (vmsort.ContentButton == "Выход")
+            {
+                Application one = new Application();
+                one.Shutdown();
+            }
             if (vmsort.answerA1 == vmsort.answerB1 ||
                    vmsort.answerA2 == vmsort.answerB2 ||
                    vmsort.answerA3 == vmsort.answerB3 ||
@@ -44,6 +49,28 @@ namespace Test
                 const int COUNT = 5;
                 int countfrom = new int();
                 int countto = new int();
+
+                vmsort.answers.Add(vmsort.answerA1);
+                vmsort.answers.Add(vmsort.answerA2);
+                vmsort.answers.Add(vmsort.answerA3);
+                vmsort.answers.Add(vmsort.answerA4);
+                vmsort.answers.Add(vmsort.answerA5);
+
+                var prop = parameter.GetType().GetProperty("SortQuestion",
+                        BindingFlags.GetProperty | BindingFlags.Public | BindingFlags.Instance);
+
+                var propvis = parameter.GetType().GetProperty("GridVisibility",
+                       BindingFlags.GetProperty | BindingFlags.Public | BindingFlags.Instance);
+
+                var propvisResult = parameter.GetType().GetProperty("ResultVisibility",
+                       BindingFlags.GetProperty | BindingFlags.Public | BindingFlags.Instance);
+
+                var propcount = parameter.GetType().GetProperty("count",
+                        BindingFlags.GetProperty | BindingFlags.Public | BindingFlags.Instance);
+
+                var propcontent = parameter.GetType().GetProperty("ContentButton",
+                        BindingFlags.GetProperty | BindingFlags.Public | BindingFlags.Instance);
+
                 countfrom = vmsort.count;
                 countto = vmsort.count + COUNT;
                 if (countfrom != sort.Count)
@@ -52,18 +79,26 @@ namespace Test
                     {
                         SortQuestion.Add(sort[i]);
                     }
+                    prop.SetValue(parameter, SortQuestion);
+                    propvis.SetValue(parameter, "Visible");
+                    propcount.SetValue(parameter, countto);
+                    if (countto == sort.Count)
+                    {
+                        propcontent.SetValue(parameter, "Результат");
+                    }
 
+                    else propcontent.SetValue(parameter, "Следующие");
                 }
-                else {
+                else
+                {
+                    propvis.SetValue(parameter, "Collapsed");
+                    propvisResult.SetValue(parameter, "Visible");
+                    propcontent.SetValue(parameter, "Выход");
+                    
                 }
                 
-                vmsort.answers.Add(vmsort.answerA1);
-                vmsort.answers.Add(vmsort.answerA2);
-                vmsort.answers.Add(vmsort.answerA3);
-                vmsort.answers.Add(vmsort.answerA4);
-                vmsort.answers.Add(vmsort.answerA5);
 
-                #region set prop parameter
+                #region set radioButton
                 var propResetAnswerA1 = parameter.GetType().GetProperty("answerA1",
                         BindingFlags.GetProperty | BindingFlags.Public | BindingFlags.Instance);
                 propResetAnswerA1.SetValue(parameter,false);
@@ -103,28 +138,14 @@ namespace Test
                 var propResetAnswerB5 = parameter.GetType().GetProperty("answerB5",
                        BindingFlags.GetProperty | BindingFlags.Public | BindingFlags.Instance);
                 propResetAnswerB5.SetValue(parameter, false);
-
-                var propcontent = parameter.GetType().GetProperty("ContentButton",
-                        BindingFlags.GetProperty | BindingFlags.Public | BindingFlags.Instance);
-
-                    if (countto == sort.Count)
-                    {
-                        propcontent.SetValue(parameter, "Результат");
-                    }
-                    else propcontent.SetValue(parameter, "Следующие");
-
-                    var propvis = parameter.GetType().GetProperty("GridVisibility",
-                        BindingFlags.GetProperty | BindingFlags.Public | BindingFlags.Instance);
-                    propvis.SetValue(parameter, "Visible");
-
-                    var propcount = parameter.GetType().GetProperty("count",
-                        BindingFlags.GetProperty | BindingFlags.Public | BindingFlags.Instance);
-                    propcount.SetValue(parameter, countto);
-
-                    var prop = parameter.GetType().GetProperty("SortQuestion",
-                        BindingFlags.GetProperty | BindingFlags.Public | BindingFlags.Instance);
-                    prop.SetValue(parameter, SortQuestion);
                 #endregion
+
+                   
+
+                   
+                    
+                
+
                 #region DoPropertyChanged
                 var meth = parameter.GetType().GetMethod("DoPropertyChanged");
                
@@ -155,6 +176,8 @@ namespace Test
                     meth.Invoke(parameter, parContent);
                     object[] parVisibility = new object[] { "GridVisibility" };
                     meth.Invoke(parameter, parVisibility);
+                    object[] parVisibilityResult = new object[] { "ResultVisibility" };
+                    meth.Invoke(parameter, parVisibilityResult);
                     object[] parSort = new object[] { "SortQuestion" };
                     meth.Invoke(parameter, parSort);
                     }

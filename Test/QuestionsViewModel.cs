@@ -44,23 +44,90 @@ namespace Test
         public bool answerA5 { get; set; }
         public bool answerB5 { get; set; }
         public int count {get; set; }
+        public string ResultVisibility { get; set; }
         public ICommand ChooseQuestion { get; set; }
         public ICommand Check_Answer { get; set; }
-        public void Result(List<bool> answers)
+        public char[] Result(List<bool> answers)
         {
-            //int oneIndicator;
-            //int[] arrayanswers;
-            //arrayanswers = new int[answers.Count];
+            int Indicator1 = 0;
+            int Indicator2 = 0;
+            int Indicator3 = 0;
+            int Indicator4 = 0;
+            char[] result = new char[4];
 
-            //for (int i = 0; i < answers.Count; i++)
-            //{
-            //    if (answers[i] == true)
-            //        arrayanswers[i] = 1;
+            int[] arrayanswers = new int[answers.Count];
 
-            //}
+            for (int i = 0; i < answers.Count; i = i + 7)
+            {
+                if (answers[i] == true)
+                {
+                    Indicator1 = Indicator1 + 1;
+                }
+            }
+            for (int i = 1; i < answers.Count; i = i + 7)
+            {
+                if (answers[i] == true)
+                {
+                    Indicator2 = Indicator2 + 1;
+                }
+            }
+            for (int i = 2; i < answers.Count; i = i + 7)
+            {
+                if (answers[i] == true)
+                {
+                    Indicator2 = Indicator2 + 1;
+                }
+            }
+            for (int i = 3; i < answers.Count; i = i + 7)
+            {
+                if (answers[i] == true)
+                {
+                    Indicator3 = Indicator3 + 1;
+                }
+            }
+            for (int i = 4; i < answers.Count; i = i + 7)
+            {
+                if (answers[i] == true)
+                {
+                    Indicator3 = Indicator3 + 1;
+                }
+            }
+            for (int i = 5; i < answers.Count; i = i + 7)
+            {
+                if (answers[i] == true)
+                {
+                    Indicator4 = Indicator4 + 1;
+                }
+            }
+            for (int i = 6; i < answers.Count; i = i + 7)
+            {
+                if (answers[i] == true)
+                {
+                    Indicator4 = Indicator4 + 1;
+                }
+            }
+
+            if (Indicator1 >= 5)
+                result[0] = 'E';
+            else result[0] = 'I';
+
+            if (Indicator1 >= 10)
+                result[1] = 'S';
+            else result[1] = 'N';
+
+            if (Indicator1 >= 10)
+                result[2] = 'T';
+            else result[2] = 'F';
+
+            if (Indicator1 >= 10)
+                result[3] = 'J';
+            else result[3] = 'P';
+
+            return result;
+
 
         }
-     
+
         public QuestionsViewModel()
         {
 
@@ -92,7 +159,9 @@ namespace Test
             }
             answers = new List<bool>();
             ContentButton = "Следующие";
-            
+            ResultVisibility = "Collapsed";
+
+
         }
 
        
