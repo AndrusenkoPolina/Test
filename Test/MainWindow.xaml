@@ -37,13 +37,7 @@
                 </Image.ToolTip>
             </Image>
             <Button Grid.Column="1" Style="{StaticResource ButtonStyle}" Template="{StaticResource TemplateButton}" Content="{Binding ContentButton}" 
-                    Command="{Binding ChooseQuestion}" CommandParameter="{Binding}" 
-                    >
-                <Button.ToolTip >
-                    <ToolTip Style="{StaticResource TooltipStyle}">
-                        Следующие вопросы доступны только после ответа на предыдущие!
-                    </ToolTip>
-                </Button.ToolTip>
+                    Command="{Binding ChooseQuestion}" CommandParameter="{Binding}" >
             </Button>
 
             <Button Grid.Column="2" Background="{StaticResource ButtonImageStatisticBrush}" Template="{StaticResource ResourceKey=TemplateButton}"
@@ -83,16 +77,16 @@
                         <RowDefinition/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <RadioButton GroupName="que1" Grid.Row="1"  Style="{StaticResource RadioButtonStyle}" />
-                    <RadioButton GroupName="que1" Grid.Row="2" Style="{StaticResource RadioButtonStyle}"/>
-                    <RadioButton GroupName="que2" Grid.Row="4"  Style="{StaticResource RadioButtonStyle}" />
-                    <RadioButton GroupName="que2" Grid.Row="5" Style="{StaticResource RadioButtonStyle}"/>
-                    <RadioButton GroupName="que3" Grid.Row="7"  Style="{StaticResource RadioButtonStyle}" />
-                    <RadioButton GroupName="que3" Grid.Row="8" Style="{StaticResource RadioButtonStyle}"/>
-                    <RadioButton GroupName="que4" Grid.Row="10"  Style="{StaticResource RadioButtonStyle}" />
-                    <RadioButton GroupName="que4" Grid.Row="11" Style="{StaticResource RadioButtonStyle}"/>
-                    <RadioButton GroupName="que5" Grid.Row="13"  Style="{StaticResource RadioButtonStyle}" />
-                    <RadioButton GroupName="que5" Grid.Row="14" Style="{StaticResource RadioButtonStyle}"/>
+                    <RadioButton GroupName="que1" Grid.Row="1"  Style="{StaticResource RadioButtonStyle}" IsChecked="{Binding answerA1}"/>
+                    <RadioButton GroupName="que1" Grid.Row="2" Style="{StaticResource RadioButtonStyle}"  IsChecked="{Binding answerB1}"/>
+                    <RadioButton GroupName="que2" Grid.Row="4"  Style="{StaticResource RadioButtonStyle}" IsChecked="{Binding answerA2}" />
+                    <RadioButton GroupName="que2" Grid.Row="5" Style="{StaticResource RadioButtonStyle}" IsChecked="{Binding answerB2}"/>
+                    <RadioButton GroupName="que3" Grid.Row="7"  Style="{StaticResource RadioButtonStyle}" IsChecked="{Binding answerA3}" />
+                    <RadioButton GroupName="que3" Grid.Row="8" Style="{StaticResource RadioButtonStyle}" IsChecked="{Binding answerB3}"/>
+                    <RadioButton GroupName="que4" Grid.Row="10"  Style="{StaticResource RadioButtonStyle}"  IsChecked="{Binding answerA4}"/>
+                    <RadioButton GroupName="que4" Grid.Row="11" Style="{StaticResource RadioButtonStyle}" IsChecked="{Binding answerB4}"/>
+                    <RadioButton GroupName="que5" Grid.Row="13"  Style="{StaticResource RadioButtonStyle}" IsChecked="{Binding answerA5}"/>
+                    <RadioButton GroupName="que5" Grid.Row="14" Style="{StaticResource RadioButtonStyle}" IsChecked="{Binding answerB5}"/>
                 </Grid>
                     <ItemsControl ItemsSource="{Binding SortQuestion}" Grid.Column="1">
                     <ItemsControl.ItemTemplate>

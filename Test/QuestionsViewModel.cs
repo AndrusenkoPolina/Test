@@ -30,12 +30,37 @@ namespace Test
         public ObservableCollection<QuestionViewModel> Questions { get; set; }
         public ObservableCollection<QuestionViewModel> SortQuestion { get; set; }
         public string GridVisibility { get; set; }
+        public string ButtonVisibility { get; set; }
         public string ContentButton { get; set; }
-        public int[] answers { get; set; }
+        public List <bool> answers { get; set; }
+        public bool answerA1 { get; set; }
+        public bool answerB1 { get; set; }
+        public bool answerA2 { get; set; }
+        public bool answerB2 { get; set; }
+        public bool answerA3 { get; set; }
+        public bool answerB3 { get; set; }
+        public bool answerA4 { get; set; }
+        public bool answerB4 { get; set; }
+        public bool answerA5 { get; set; }
+        public bool answerB5 { get; set; }
         public int count {get; set; }
         public ICommand ChooseQuestion { get; set; }
         public ICommand Check_Answer { get; set; }
+        public void Result(List<bool> answers)
+        {
+            //int oneIndicator;
+            //int[] arrayanswers;
+            //arrayanswers = new int[answers.Count];
 
+            //for (int i = 0; i < answers.Count; i++)
+            //{
+            //    if (answers[i] == true)
+            //        arrayanswers[i] = 1;
+
+            //}
+
+        }
+     
         public QuestionsViewModel()
         {
 
@@ -58,9 +83,16 @@ namespace Test
                 });
 
             }
-            GridVisibility = "Collapsed";
-            ContentButton = "Начать тест!";
-
+            const int COUNT = 5;
+            count = COUNT;
+            SortQuestion = new ObservableCollection<QuestionViewModel>();
+            for (int i = 0; i < count; i++)
+            {
+                SortQuestion.Add(Questions[i]);
+            }
+            answers = new List<bool>();
+            ContentButton = "Следующие";
+            
         }
 
        
