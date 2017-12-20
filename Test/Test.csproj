@@ -62,7 +62,6 @@
     </Page>
     <Compile Include="CheckAnswer.cs" />
     <Compile Include="OutputCommand.cs" />
-    <Compile Include="QuestionViewModel.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -122,6 +121,10 @@
     <ProjectReference Include="..\Connection\Connection.csproj">
       <Project>{72b987ab-ddc8-419d-9836-b50bd6edfeed}</Project>
       <Name>Connection</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DTO\DTO.csproj">
+      <Project>{19e7a32e-aa1f-4d48-a9e7-6c9c4b502d36}</Project>
+      <Name>DTO</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

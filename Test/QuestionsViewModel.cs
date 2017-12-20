@@ -11,6 +11,7 @@ using Connection;
 using System.Data.SqlClient;
 using System.Windows.Input;
 using System.Windows;
+using DTO;
 
 namespace Test
 {
@@ -27,8 +28,8 @@ namespace Test
         }
 
 
-        public ObservableCollection<QuestionViewModel> Questions { get; set; }
-        public ObservableCollection<QuestionViewModel> SortQuestion { get; set; }
+        public ObservableCollection<Question> Questions { get; set; }
+        public ObservableCollection<Question> SortQuestion { get; set; }
         public string GridVisibility { get; set; }
         public string ButtonVisibility { get; set; }
         public string ContentButton { get; set; }
@@ -57,10 +58,10 @@ namespace Test
             
             Logic lg = new Logic(cnf,"Open","");
             
-            Questions = new ObservableCollection<QuestionViewModel>();
+            Questions = new ObservableCollection<Question>();
             foreach (var q in lg.Questions)
             {
-                Questions.Add(new QuestionViewModel()
+                Questions.Add(new Question()
                 {
                     id = q.id,
                     question = q.question,
@@ -72,7 +73,7 @@ namespace Test
             }
             const int COUNT = 5;
             count = COUNT;
-            SortQuestion = new ObservableCollection<QuestionViewModel>();
+            SortQuestion = new ObservableCollection<Question>();
             for (int i = 0; i < count; i++)
             {
                 SortQuestion.Add(Questions[i]);

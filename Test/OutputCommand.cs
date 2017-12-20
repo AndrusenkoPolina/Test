@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DTO;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -41,7 +42,7 @@ namespace Test
             else
             {
 
-                ObservableCollection<QuestionViewModel> SortQuestion = new ObservableCollection<QuestionViewModel>();
+                ObservableCollection<Question> SortQuestion = new ObservableCollection<Question>();
                 const int COUNT = 5;
                 int countfrom = new int();
                 int countto = new int();

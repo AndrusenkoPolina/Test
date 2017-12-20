@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BisnessLogic
+namespace DTO
 {
     public class Question
     {
@@ -12,5 +12,12 @@ namespace BisnessLogic
         public string question { get; set; }
         public string answerA { get; set; }
         public string answerB { get; set; }
+    }
+    public class Result
+    {
+        public int id { get; set; }
+        public string type { get; set; }
+        public string name { get; set; }
+        public string result { get; set; }
     }
 }

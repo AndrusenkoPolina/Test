@@ -124,7 +124,7 @@ namespace Test
             Config cnf = new Config();
             cnf.DataPath = "Server=LENOVO-PC\\POLINA;Database=Question;Trusted_Connection=True;";
 
-            Logic lg = new Logic(cnf, "Result", res[0]);
+            Logic lg = new Logic(cnf, "Result", res[0].ToString());
 
         }
 

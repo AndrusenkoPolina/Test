@@ -1,4 +1,5 @@
 ﻿using Connection;
+using DTO;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -34,29 +35,29 @@ namespace DAL
 
             }
         }
-            public List<Question> GetResult(string config, string result)
-        {
-            using (SqlConnection connection = new SqlConnection(config))
-            {
-                connection.Open();
-                SqlCommand command = new SqlCommand("select * from Result where type ='"+ result +"'", connection);
-                var ChooseResult = command.ExecuteReader();
+        //    public List<Question> GetResult(string config, string result)
+        //{
+        //    using (SqlConnection connection = new SqlConnection(config))
+        //    {
+        //        connection.Open();
+        //        SqlCommand command = new SqlCommand("select * from Result where type ='"+ result +"'", connection);
+        //        var ChooseResult = command.ExecuteReader();
 
-                while (ChooseResult.Read())
-                {
-                    Result q = new Result();
-                    q.id = (int)ChooseResult["id"];
-                    q.question = (string)ChooseResult["type"];
-                    q.answerA = (string)ChooseResult["name"];
-                    q.answerB = (string)ChooseResult["result"];
-                    Questions.Add(q);
-                }
+        //        while (ChooseResult.Read())
+        //        {
+        //            Result q = new Result();
+        //            q.id = (int)ChooseResult["id"];
+        //            q.question = (string)ChooseResult["type"];
+        //            q.answerA = (string)ChooseResult["name"];
+        //            q.answerB = (string)ChooseResult["result"];
+        //            Questions.Add(q);
+        //        }
 
-                return Questions;
+        //        return Questions;
 
-            }
+        //    }
 
-        }
+        //}
     }
 }
 
