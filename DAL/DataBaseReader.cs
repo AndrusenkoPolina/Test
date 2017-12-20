@@ -2,6 +2,7 @@
 using DTO;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -15,12 +16,22 @@ namespace DAL
         public List<Question> GetQuestion(string config)
         {
             List<Question> Questions = new List<Question>();
-            using (SqlConnection connection = new SqlConnection(config))
-            {
-                connection.Open();
-                SqlCommand command = new SqlCommand("select q.id_question, question,answerA,answerB from question q inner join answerAB a ON a.id_question = q.id_question", connection);
-                var questionReader = command.ExecuteReader();
+            if (config == null)
+                throw new ArgumentNullException("Строка подключения пустая");
+             using (SqlConnection connection = new SqlConnection(config))
+                {
+                try
+                {
+                    connection.Open();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Неверная строка подключения", ex);
+                }
 
+                    SqlCommand command = new SqlCommand("select q.id_question, question,answerA,answerB from question q inner join answerAB a ON a.id_question = q.id_question", connection);
+                    var questionReader = command.ExecuteReader();
+                
                 while (questionReader.Read())
                 {
                     Question q = new Question();
@@ -35,17 +46,25 @@ namespace DAL
 
             }
         }
-        public List<Result> GetResult(string config, string result)
+        public ObservableCollection<Result> GetResult(string config, string result)
         {
+            if (config == null)
+                throw new ArgumentNullException("Строка подключения пустая");
             using (SqlConnection connection = new SqlConnection(config))
             {
-                connection.Open();
+                try
+                {
+                    connection.Open();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Неверная строка подключения", ex);
+                }
                 SqlCommand command = new SqlCommand("select * from Result where type ='" +result +"'" , connection);
                 var ChooseResult = command.ExecuteReader();
-
-                    ChooseResult.Read();
-                    List<Result> listResult = new List<Result>();
-                    Result r = new Result();
+                ChooseResult.Read();
+                ObservableCollection<Result> listResult = new ObservableCollection<Result>();
+                Result r = new Result();
                 r.id = (int)ChooseResult["id"];
                 r.type = (string)ChooseResult["type"];
                 r.name = (string)ChooseResult["name"];

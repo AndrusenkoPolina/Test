@@ -33,8 +33,8 @@ namespace Test
         public string GridVisibility { get; set; }
         public string ButtonVisibility { get; set; }
         public string ContentButton { get; set; }
-        public static List <bool> answers { get; set; }
-        public static List<Result> resultoutput { get; set; }
+        public static List<bool> answers { get; set; }
+        public GetResult result { get; set; }
         public bool answerA1 { get; set; }
         public bool answerB1 { get; set; }
         public bool answerA2 { get; set; }
@@ -45,20 +45,19 @@ namespace Test
         public bool answerB4 { get; set; }
         public bool answerA5 { get; set; }
         public bool answerB5 { get; set; }
-        public int count {get; set; }
+        public int count { get; set; }
         public string ResultVisibility { get; set; }
         public ICommand ChooseQuestion { get; set; }
 
-       
         public QuestionsViewModel()
         {
 
             ChooseQuestion = new OutputCommand();
             Config cnf = new Config();
             cnf.DataPath = "Server=LENOVO-PC\\POLINA;Database=Question;Trusted_Connection=True;";
-            
-            Logic lg = new Logic(cnf,"Open","");
-            
+
+            Logic lg = new Logic(cnf, "Open", "");
+
             Questions = new ObservableCollection<Question>();
             foreach (var q in lg.Questions)
             {
@@ -82,10 +81,12 @@ namespace Test
             answers = new List<bool>();
             ContentButton = "Следующие";
             ResultVisibility = "Collapsed";
-
+        }
+            
+                 
            
 
-        }
+        
 
        
     }

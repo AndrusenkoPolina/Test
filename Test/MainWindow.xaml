@@ -52,23 +52,18 @@
                 </Button.ToolTip>
             </Button>
         </Grid>
-        <ItemsControl ItemsSource="{Binding Path=GetResult.output}" Visibility="{Binding ResultVisibility}" >
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Vertical" Background="LightBlue">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text= "{Binding id}" Style="{StaticResource TextBlockQuestion}" />
-                            <TextBlock Text="{Binding type}" Style="{StaticResource TextBlockQuestion}"/>
-                            <TextBlock Text="{Binding name}" Style="{StaticResource TextBlockQuestion}"/>
+        <Grid  Background="LightBlue" Visibility="{Binding ResultVisibility}" HorizontalAlignment="Center">
+
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                    <TextBlock Text= "{Binding result.output[0].id}" />
+                    <TextBlock Text="{Binding Path =result.output[0].type}"/>
+                    <TextBlock Text="{Binding Path=result.output[0].name, Mode=TwoWay}"/>
+                            </StackPanel>
+                <TextBlock Text="{Binding Path=result.output[0].result,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBlockAnswer}"  />
                         </StackPanel>
 
-                        <TextBlock Text="{Binding result}" Style="{StaticResource TextBlockAnswer}"  />
-
-                    </StackPanel>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-
+        </Grid>
         <ScrollViewer>
             <Grid  Name="main" Style="{StaticResource GridStyle}" Visibility="{Binding GridVisibility}" >
                 <Grid.ColumnDefinitions>

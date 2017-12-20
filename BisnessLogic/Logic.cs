@@ -3,6 +3,7 @@ using DAL;
 using DTO;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,10 +13,13 @@ namespace BisnessLogic
     public class Logic
     {
         public List<Question> Questions { get; set; }
-        public List<Result> Result { get; set; }
+        public ObservableCollection<Result> Result { get; set; }
 
         public Logic(Config cnf, string action,string result)
         {
+            if (action == null)
+                throw new ArgumentNullException();
+
             if (action == "Open")
             {
                 DataBaseReader reader = new DataBaseReader();
@@ -35,7 +39,7 @@ namespace BisnessLogic
             if (action == "Result")
             {
                 DataBaseReader reader = new DataBaseReader();
-                Result = new List<Result>();
+                Result = new ObservableCollection<Result>();
                 Result = reader.GetResult(cnf.DataPath, result);
                 
             }

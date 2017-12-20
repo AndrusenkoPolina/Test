@@ -46,7 +46,8 @@ namespace Test
                 const int COUNT = 5;
                 int countfrom = new int();
                 int countto = new int();
-
+                
+                //Добавляем выбранные значение в массив, чтобы потом его использовать в подсчёте результатов
                 QuestionsViewModel.answers.Add(vmsort.answerA1);
                 QuestionsViewModel.answers.Add(vmsort.answerA2);
                 QuestionsViewModel.answers.Add(vmsort.answerA3);

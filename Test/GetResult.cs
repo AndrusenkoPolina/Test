@@ -3,6 +3,7 @@ using Connection;
 using DTO;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -23,7 +24,7 @@ namespace Test
         }
 
         public List<bool> answers { get; set; }
-        public List<Result> output { get; set; }
+        public ObservableCollection<Result> output { get; set; }
         
         #region вычисление результата
         public List<object> result(List<bool> answers)
@@ -119,7 +120,15 @@ namespace Test
 
         public GetResult()
         {
-            answers = QuestionsViewModel.answers;
+            try
+            {
+                answers = QuestionsViewModel.answers;
+            }
+            catch (ArgumentNullException ex)
+            {
+                throw new ArgumentNullException("Массив результатов не может быть пустым", ex);
+            }
+
             List<object> res = new List<object>();
             res = result(answers);
 
@@ -127,9 +136,9 @@ namespace Test
             cnf.DataPath = "Server=LENOVO-PC\\POLINA;Database=Question;Trusted_Connection=True;";
 
             Logic lg = new Logic(cnf, "Result", res[0].ToString());
-            output = new List<Result>();
+            output = new ObservableCollection<Result>();
             output = lg.Result;
-            QuestionsViewModel.resultoutput = output;
+
 
         }
 

@@ -23,7 +23,7 @@ namespace Test
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new QuestionsViewModel();
+            
         }
 
         

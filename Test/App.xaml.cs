@@ -13,5 +13,10 @@ namespace Test
     /// </summary>
     public partial class App : Application
     {
+        private void Application_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+        {
+            MessageBox.Show("Что-то пошло не так..." + e.Exception.Message, "Exeption Sample", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+        
     }
 }
