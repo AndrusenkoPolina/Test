@@ -13,7 +13,7 @@ namespace BisnessLogic
     public class Logic
     {
         public List<Question> Questions { get; set; }
-        public ObservableCollection<Result> Result { get; set; }
+        public Result Result { get; set; }
 
         public Logic(Config cnf, string action,string result)
         {
@@ -39,7 +39,7 @@ namespace BisnessLogic
             if (action == "Result")
             {
                 DataBaseReader reader = new DataBaseReader();
-                Result = new ObservableCollection<Result>();
+                Result = new Result();
                 Result = reader.GetResult(cnf.DataPath, result);
                 
             }

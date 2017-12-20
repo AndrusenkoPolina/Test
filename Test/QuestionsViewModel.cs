@@ -27,14 +27,13 @@ namespace Test
             }
         }
 
-
         public ObservableCollection<Question> Questions { get; set; }
         public ObservableCollection<Question> SortQuestion { get; set; }
         public string GridVisibility { get; set; }
         public string ButtonVisibility { get; set; }
         public string ContentButton { get; set; }
         public static List<bool> answers { get; set; }
-        public GetResult result { get; set; }
+        private GetResult result { get; set; }
         public bool answerA1 { get; set; }
         public bool answerB1 { get; set; }
         public bool answerA2 { get; set; }
@@ -49,6 +48,18 @@ namespace Test
         public string ResultVisibility { get; set; }
         public ICommand ChooseQuestion { get; set; }
 
+        public GetResult Result
+
+        {
+            get { return result; }
+            set
+            {
+                result = value;
+                DoPropertyChanged("Result");
+            }
+        }
+            
+       
         public QuestionsViewModel()
         {
 
@@ -81,6 +92,7 @@ namespace Test
             answers = new List<bool>();
             ContentButton = "Следующие";
             ResultVisibility = "Collapsed";
+            Result = new GetResult();
         }
             
                  

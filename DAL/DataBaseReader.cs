@@ -46,7 +46,7 @@ namespace DAL
 
             }
         }
-        public ObservableCollection<Result> GetResult(string config, string result)
+        public Result GetResult(string config, string result)
         {
             if (config == null)
                 throw new ArgumentNullException("Строка подключения пустая");
@@ -63,15 +63,14 @@ namespace DAL
                 SqlCommand command = new SqlCommand("select * from Result where type ='" +result +"'" , connection);
                 var ChooseResult = command.ExecuteReader();
                 ChooseResult.Read();
-                ObservableCollection<Result> listResult = new ObservableCollection<Result>();
+                
                 Result r = new Result();
                 r.id = (int)ChooseResult["id"];
                 r.type = (string)ChooseResult["type"];
                 r.name = (string)ChooseResult["name"];
                 r.result = (string)ChooseResult["result"];
-                listResult.Add(r);
-            
-                return listResult;
+
+                return r;
 
             }
 

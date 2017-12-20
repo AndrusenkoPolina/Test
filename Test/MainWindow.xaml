@@ -36,6 +36,7 @@
                     </ToolTip>
                 </Image.ToolTip>
             </Image>
+           
             <Button Grid.Column="1" Style="{StaticResource ButtonStyle}" Template="{StaticResource TemplateButton}" Content="{Binding ContentButton}" 
                     Command="{Binding ChooseQuestion}" CommandParameter="{Binding}" >
             </Button>
@@ -52,17 +53,15 @@
                 </Button.ToolTip>
             </Button>
         </Grid>
-        <Grid  Background="LightBlue" Visibility="{Binding ResultVisibility}" HorizontalAlignment="Center">
-
-                        <StackPanel Orientation="Vertical">
-                            <StackPanel Orientation="Horizontal">
-                    <TextBlock Text= "{Binding result.output[0].id}" />
-                    <TextBlock Text="{Binding Path =result.output[0].type}"/>
-                    <TextBlock Text="{Binding Path=result.output[0].name, Mode=TwoWay}"/>
-                            </StackPanel>
-                <TextBlock Text="{Binding Path=result.output[0].result,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBlockAnswer}"  />
-                        </StackPanel>
-
+        <Grid Style="{StaticResource GridStyle}" Visibility="{Binding ResultVisibility}">
+            <StackPanel Orientation="Vertical">
+                <StackPanel Style="{StaticResource StackPanelElement}">
+                    <TextBlock Text="{Binding Path=Result.Output.id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBlockQuestion}"/>
+                    <TextBlock Text="{Binding Result.Output.type,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Style="{StaticResource TextBlockQuestion}"/>
+                    <TextBlock Text="{Binding Result.Output.name,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Style="{StaticResource TextBlockQuestion}"/>
+                </StackPanel>
+                <TextBlock Text="{Binding Path=Result.Output.result, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBlockAnswer}"  />
+            </StackPanel>
         </Grid>
         <ScrollViewer>
             <Grid  Name="main" Style="{StaticResource GridStyle}" Visibility="{Binding GridVisibility}" >

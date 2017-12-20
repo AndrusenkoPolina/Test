@@ -14,18 +14,20 @@ namespace Test
     public class GetResult : INotifyPropertyChanged
 
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void DoPropertyChanged(String name)
+        
+
+        public List<bool> answers { get; set; }
+        private Result output { get; set; }
+        public Result Output
         {
-            if (PropertyChanged != null)
+            get { return output; }
+            set
             {
-                PropertyChanged(this, new PropertyChangedEventArgs(name));
+                output = value;
+                DoPropertyChanged("Output");
             }
         }
 
-        public List<bool> answers { get; set; }
-        public ObservableCollection<Result> output { get; set; }
-        
         #region вычисление результата
         public List<object> result(List<bool> answers)
         {
@@ -136,11 +138,17 @@ namespace Test
             cnf.DataPath = "Server=LENOVO-PC\\POLINA;Database=Question;Trusted_Connection=True;";
 
             Logic lg = new Logic(cnf, "Result", res[0].ToString());
-            output = new ObservableCollection<Result>();
             output = lg.Result;
-
-
+           
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void DoPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
     }
 }
