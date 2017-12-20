@@ -29,11 +29,7 @@ namespace Test
             //Выдача вопросов по COUNT штук   
             var sort = vmsort.Questions;
 
-            if (vmsort.ContentButton == "Выход")
-            {
-                Application one = new Application();
-                one.Shutdown();
-            }
+
             if (vmsort.answerA1 == vmsort.answerB1 ||
                    vmsort.answerA2 == vmsort.answerB2 ||
                    vmsort.answerA3 == vmsort.answerB3 ||
@@ -50,11 +46,11 @@ namespace Test
                 int countfrom = new int();
                 int countto = new int();
 
-                vmsort.answers.Add(vmsort.answerA1);
-                vmsort.answers.Add(vmsort.answerA2);
-                vmsort.answers.Add(vmsort.answerA3);
-                vmsort.answers.Add(vmsort.answerA4);
-                vmsort.answers.Add(vmsort.answerA5);
+                QuestionsViewModel.answers.Add(vmsort.answerA1);
+                QuestionsViewModel.answers.Add(vmsort.answerA2);
+                QuestionsViewModel.answers.Add(vmsort.answerA3);
+                QuestionsViewModel.answers.Add(vmsort.answerA4);
+                QuestionsViewModel.answers.Add(vmsort.answerA5);
 
                 var prop = parameter.GetType().GetProperty("SortQuestion",
                         BindingFlags.GetProperty | BindingFlags.Public | BindingFlags.Instance);
@@ -91,17 +87,18 @@ namespace Test
                 }
                 else
                 {
+
                     propvis.SetValue(parameter, "Collapsed");
                     propvisResult.SetValue(parameter, "Visible");
                     propcontent.SetValue(parameter, "Выход");
-                    
+
                 }
-                
+
 
                 #region set radioButton
                 var propResetAnswerA1 = parameter.GetType().GetProperty("answerA1",
                         BindingFlags.GetProperty | BindingFlags.Public | BindingFlags.Instance);
-                propResetAnswerA1.SetValue(parameter,false);
+                propResetAnswerA1.SetValue(parameter, false);
 
                 var propResetAnswerB1 = parameter.GetType().GetProperty("answerB1",
                        BindingFlags.GetProperty | BindingFlags.Public | BindingFlags.Instance);
@@ -140,19 +137,13 @@ namespace Test
                 propResetAnswerB5.SetValue(parameter, false);
                 #endregion
 
-                   
-
-                   
-                    
-                
-
                 #region DoPropertyChanged
                 var meth = parameter.GetType().GetMethod("DoPropertyChanged");
-               
-                if (meth != null)
-                    {
 
-                    object[] parRadioButtonA1 = new object[] { "answerA1"  };
+                if (meth != null)
+                {
+
+                    object[] parRadioButtonA1 = new object[] { "answerA1" };
                     meth.Invoke(parameter, parRadioButtonA1);
                     object[] parRadioButtonA2 = new object[] { "answerA2" };
                     meth.Invoke(parameter, parRadioButtonA2);
@@ -180,8 +171,24 @@ namespace Test
                     meth.Invoke(parameter, parVisibilityResult);
                     object[] parSort = new object[] { "SortQuestion" };
                     meth.Invoke(parameter, parSort);
-                    }
+                }
                 #endregion
+                if (vmsort.ContentButton == "Выход")
+                {
+                    Result res = new Result();
+                    //vmsort.answers = res.answers;
+                    //var propAnswer = res.GetType().GetProperty("answers",
+                    //    BindingFlags.GetProperty | BindingFlags.Public | BindingFlags.Instance);
+                    //var meth2 = res.GetType().GetMethod("DoPropertyChanged");
+
+                    //if (meth2 != null)
+                    //{
+
+                    //    object[] answer = new object[] { "answers" };
+                    //    meth2.Invoke(parameter, answer);
+
+                    //}
+                }
             }
         }
 

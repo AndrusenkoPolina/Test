@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 namespace DAL
 {
     public class DataBaseReader
-    { 
+    {
 
         public List<Question> GetQuestion(string config)
         {
-           List<Question> Questions = new List<Question>();
+            List<Question> Questions = new List<Question>();
             using (SqlConnection connection = new SqlConnection(config))
             {
                 connection.Open();
@@ -30,10 +30,32 @@ namespace DAL
                     Questions.Add(q);
                 }
 
-                    return Questions;
-                
+                return Questions;
+
             }
-            
+        }
+            public List<Question> GetResult(string config, string result)
+        {
+            using (SqlConnection connection = new SqlConnection(config))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand("select * from Result where type ='"+ result +"'", connection);
+                var ChooseResult = command.ExecuteReader();
+
+                while (ChooseResult.Read())
+                {
+                    Result q = new Result();
+                    q.id = (int)ChooseResult["id"];
+                    q.question = (string)ChooseResult["type"];
+                    q.answerA = (string)ChooseResult["name"];
+                    q.answerB = (string)ChooseResult["result"];
+                    Questions.Add(q);
+                }
+
+                return Questions;
+
+            }
+
         }
     }
 }
