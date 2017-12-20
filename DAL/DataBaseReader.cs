@@ -35,29 +35,28 @@ namespace DAL
 
             }
         }
-        //    public List<Question> GetResult(string config, string result)
-        //{
-        //    using (SqlConnection connection = new SqlConnection(config))
-        //    {
-        //        connection.Open();
-        //        SqlCommand command = new SqlCommand("select * from Result where type ='"+ result +"'", connection);
-        //        var ChooseResult = command.ExecuteReader();
+        public List<Result> GetResult(string config, string result)
+        {
+            using (SqlConnection connection = new SqlConnection(config))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand("select * from Result where type ='" +result +"'" , connection);
+                var ChooseResult = command.ExecuteReader();
 
-        //        while (ChooseResult.Read())
-        //        {
-        //            Result q = new Result();
-        //            q.id = (int)ChooseResult["id"];
-        //            q.question = (string)ChooseResult["type"];
-        //            q.answerA = (string)ChooseResult["name"];
-        //            q.answerB = (string)ChooseResult["result"];
-        //            Questions.Add(q);
-        //        }
+                    ChooseResult.Read();
+                    List<Result> listResult = new List<Result>();
+                    Result r = new Result();
+                r.id = (int)ChooseResult["id"];
+                r.type = (string)ChooseResult["type"];
+                r.name = (string)ChooseResult["name"];
+                r.result = (string)ChooseResult["result"];
+                listResult.Add(r);
+            
+                return listResult;
 
-        //        return Questions;
+            }
 
-        //    }
-
-        //}
+        }
     }
 }
 

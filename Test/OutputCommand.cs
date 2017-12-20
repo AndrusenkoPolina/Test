@@ -176,19 +176,8 @@ namespace Test
                 #endregion
                 if (vmsort.ContentButton == "Выход")
                 {
-                    Result res = new Result();
-                    //vmsort.answers = res.answers;
-                    //var propAnswer = res.GetType().GetProperty("answers",
-                    //    BindingFlags.GetProperty | BindingFlags.Public | BindingFlags.Instance);
-                    //var meth2 = res.GetType().GetMethod("DoPropertyChanged");
-
-                    //if (meth2 != null)
-                    //{
-
-                    //    object[] answer = new object[] { "answers" };
-                    //    meth2.Invoke(parameter, answer);
-
-                    //}
+                    GetResult res = new GetResult();
+                   
                 }
             }
         }

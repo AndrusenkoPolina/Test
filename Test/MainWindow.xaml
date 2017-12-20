@@ -52,7 +52,23 @@
                 </Button.ToolTip>
             </Button>
         </Grid>
-        <TextBlock Text="ПРИФ" Visibility="{Binding ResultVisibility}"/>
+        <ItemsControl ItemsSource="{Binding Path=GetResult.output}" Visibility="{Binding ResultVisibility}" >
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical" Background="LightBlue">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text= "{Binding id}" Style="{StaticResource TextBlockQuestion}" />
+                            <TextBlock Text="{Binding type}" Style="{StaticResource TextBlockQuestion}"/>
+                            <TextBlock Text="{Binding name}" Style="{StaticResource TextBlockQuestion}"/>
+                        </StackPanel>
+
+                        <TextBlock Text="{Binding result}" Style="{StaticResource TextBlockAnswer}"  />
+
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
         <ScrollViewer>
             <Grid  Name="main" Style="{StaticResource GridStyle}" Visibility="{Binding GridVisibility}" >
                 <Grid.ColumnDefinitions>
@@ -88,7 +104,7 @@
                     <RadioButton GroupName="que5" Grid.Row="13"  Style="{StaticResource RadioButtonStyle}" IsChecked="{Binding answerA5}"/>
                     <RadioButton GroupName="que5" Grid.Row="14" Style="{StaticResource RadioButtonStyle}" IsChecked="{Binding answerB5}"/>
                 </Grid>
-                    <ItemsControl ItemsSource="{Binding SortQuestion}" Grid.Column="1">
+                <ItemsControl ItemsSource="{Binding SortQuestion}" Grid.Column="1">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Vertical">

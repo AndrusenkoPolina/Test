@@ -34,6 +34,7 @@ namespace Test
         public string ButtonVisibility { get; set; }
         public string ContentButton { get; set; }
         public static List <bool> answers { get; set; }
+        public static List<Result> resultoutput { get; set; }
         public bool answerA1 { get; set; }
         public bool answerB1 { get; set; }
         public bool answerA2 { get; set; }

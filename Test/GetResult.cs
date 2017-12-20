@@ -1,5 +1,6 @@
 ﻿using BisnessLogic;
 using Connection;
+using DTO;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Test
 {
-    public class Result : INotifyPropertyChanged
+    public class GetResult : INotifyPropertyChanged
 
     {
         public event PropertyChangedEventHandler PropertyChanged;
@@ -22,6 +23,7 @@ namespace Test
         }
 
         public List<bool> answers { get; set; }
+        public List<Result> output { get; set; }
         
         #region вычисление результата
         public List<object> result(List<bool> answers)
@@ -115,7 +117,7 @@ namespace Test
         }
         #endregion
 
-        public Result()
+        public GetResult()
         {
             answers = QuestionsViewModel.answers;
             List<object> res = new List<object>();
@@ -125,6 +127,9 @@ namespace Test
             cnf.DataPath = "Server=LENOVO-PC\\POLINA;Database=Question;Trusted_Connection=True;";
 
             Logic lg = new Logic(cnf, "Result", res[0].ToString());
+            output = new List<Result>();
+            output = lg.Result;
+            QuestionsViewModel.resultoutput = output;
 
         }
 
