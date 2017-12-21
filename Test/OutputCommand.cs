@@ -23,169 +23,135 @@ namespace Test
 
         public void Execute(object parameter)
         {
-            var vmsort = parameter as QuestionsViewModel;
-            if (vmsort == null)
+            if (parameter == null)
                 throw new ArgumentNullException("Модель представления не может быть null!");
-            
-            //Выдача вопросов по COUNT штук   
+
+            var vmsort = parameter as QuestionsViewModel;
+            ObservableCollection<Question> SortQuestion = new ObservableCollection<Question>();
             var sort = vmsort.Questions;
+            const int COUNT = 5;
 
+            if (vmsort.ContentButton == "")
+                throw new ArgumentNullException("Кнопка должна содержать Content");
 
-            if (vmsort.answerA1 == vmsort.answerB1 ||
-                   vmsort.answerA2 == vmsort.answerB2 ||
-                   vmsort.answerA3 == vmsort.answerB3 ||
-                   vmsort.answerA4 == vmsort.answerB4 ||
-                   vmsort.answerA5 == vmsort.answerB5)
+            if (vmsort.ContentButton == "Начать тест")
             {
-                MessageBox.Show("Вы ответили не на все вопросы!");
+                vmsort.ContentButton = "Следующие";
+                vmsort.GridVisibility = "Visible";
+                vmsort.StartVisibility = "Collapsed";
+
+                for (int i = 0; i < COUNT; i++)
+                {
+                    SortQuestion.Add(sort[i]);
+                }
+                vmsort.count = COUNT;
             }
+
             else
             {
+             
 
-                ObservableCollection<Question> SortQuestion = new ObservableCollection<Question>();
-                const int COUNT = 5;
-                int countfrom = new int();
-                int countto = new int();
-                
-                //Добавляем выбранные значение в массив, чтобы потом его использовать в подсчёте результатов
-                QuestionsViewModel.answers.Add(vmsort.answerA1);
-                QuestionsViewModel.answers.Add(vmsort.answerA2);
-                QuestionsViewModel.answers.Add(vmsort.answerA3);
-                QuestionsViewModel.answers.Add(vmsort.answerA4);
-                QuestionsViewModel.answers.Add(vmsort.answerA5);
 
-                var prop = parameter.GetType().GetProperty("SortQuestion",
-                        BindingFlags.GetProperty | BindingFlags.Public | BindingFlags.Instance);
-
-                var propvis = parameter.GetType().GetProperty("GridVisibility",
-                       BindingFlags.GetProperty | BindingFlags.Public | BindingFlags.Instance);
-
-                var propvisResult = parameter.GetType().GetProperty("ResultVisibility",
-                       BindingFlags.GetProperty | BindingFlags.Public | BindingFlags.Instance);
-
-                var propcount = parameter.GetType().GetProperty("count",
-                        BindingFlags.GetProperty | BindingFlags.Public | BindingFlags.Instance);
-
-                var propcontent = parameter.GetType().GetProperty("ContentButton",
-                        BindingFlags.GetProperty | BindingFlags.Public | BindingFlags.Instance);
-
-                countfrom = vmsort.count;
-                countto = vmsort.count + COUNT;
-                if (countfrom != sort.Count)
+                if (  vmsort.AnswerA1 == vmsort.AnswerB1 ||
+                      vmsort.AnswerA2 == vmsort.AnswerB2 ||
+                      vmsort.AnswerA3 == vmsort.AnswerB3 ||
+                      vmsort.AnswerA4 == vmsort.AnswerB4 ||
+                      vmsort.AnswerA5 == vmsort.AnswerB5)
                 {
-                    for (int i = countfrom; i < countto; i++)
-                    {
-                        SortQuestion.Add(sort[i]);
-                    }
-                    prop.SetValue(parameter, SortQuestion);
-                    propvis.SetValue(parameter, "Visible");
-                    propcount.SetValue(parameter, countto);
-                    if (countto == sort.Count)
-                    {
-                        propcontent.SetValue(parameter, "Результат");
-                    }
-
-                    else propcontent.SetValue(parameter, "Следующие");
+                    MessageBox.Show("Вы ответили не на все вопросы!");
                 }
                 else
                 {
+                    //Добавляем выбранные значение в массив, чтобы потом его использовать в подсчёте результатов
+                    if (QuestionsViewModel.answers == null)
+                        throw new ArgumentNullException("Массив не может быть пустым!");
+                        QuestionsViewModel.answers.Add(vmsort.AnswerA1);
+                        QuestionsViewModel.answers.Add(vmsort.AnswerA2);
+                        QuestionsViewModel.answers.Add(vmsort.AnswerA3);
+                        QuestionsViewModel.answers.Add(vmsort.AnswerA4);
+                        QuestionsViewModel.answers.Add(vmsort.AnswerA5);           
 
-                    propvis.SetValue(parameter, "Collapsed");
-                    propvisResult.SetValue(parameter, "Visible");
-                    propcontent.SetValue(parameter, "Выход");
+                    //Обнуляем значения
+                    vmsort.AnswerA1 = false;
+                    vmsort.AnswerB1 = false;
+                    vmsort.AnswerA2 = false;
+                    vmsort.AnswerB2 = false;
+                    vmsort.AnswerA3 = false;
+                    vmsort.AnswerB3 = false;
+                    vmsort.AnswerA4 = false;
+                    vmsort.AnswerB4 = false;
+                    vmsort.AnswerA5 = false;
+                    vmsort.AnswerB5 = false;
 
-                }
 
 
-                #region set radioButton
-                var propResetAnswerA1 = parameter.GetType().GetProperty("answerA1",
-                        BindingFlags.GetProperty | BindingFlags.Public | BindingFlags.Instance);
-                propResetAnswerA1.SetValue(parameter, false);
+                    //var propvis = parameter.GetType().GetProperty("GridVisibility",
+                    //       BindingFlags.GetProperty | BindingFlags.Public | BindingFlags.Instance);
 
-                var propResetAnswerB1 = parameter.GetType().GetProperty("answerB1",
-                       BindingFlags.GetProperty | BindingFlags.Public | BindingFlags.Instance);
-                propResetAnswerB1.SetValue(parameter, false);
+                    //var propvisResult = parameter.GetType().GetProperty("ResultVisibility",
+                    //       BindingFlags.GetProperty | BindingFlags.Public | BindingFlags.Instance);
 
-                var propResetAnswerA2 = parameter.GetType().GetProperty("answerA2",
-                       BindingFlags.GetProperty | BindingFlags.Public | BindingFlags.Instance);
-                propResetAnswerA2.SetValue(parameter, false);
+                    //var propcount = parameter.GetType().GetProperty("count",
+                    //        BindingFlags.GetProperty | BindingFlags.Public | BindingFlags.Instance);
 
-                var propResetAnswerB2 = parameter.GetType().GetProperty("answerB2",
-                       BindingFlags.GetProperty | BindingFlags.Public | BindingFlags.Instance);
-                propResetAnswerB2.SetValue(parameter, false);
+                    //var propcontent = parameter.GetType().GetProperty("ContentButton",
+                    //        BindingFlags.GetProperty | BindingFlags.Public | BindingFlags.Instance);
 
-                var propResetAnswerA3 = parameter.GetType().GetProperty("answerA3",
-                       BindingFlags.GetProperty | BindingFlags.Public | BindingFlags.Instance);
-                propResetAnswerA3.SetValue(parameter, false);
+                    //Выдача вопросов по COUNT штук  
+                    int countfrom = new int();
+                    int countto = new int();
+                    countfrom = vmsort.count;
+                    countto = vmsort.count + COUNT;
+                    if (countfrom != sort.Count)
+                    {
+                        for (int i = countfrom; i < countto; i++)
+                        {
+                            SortQuestion.Add(sort[i]);
+                        }
+                        vmsort.count = countto;
 
-                var propResetAnswerB3 = parameter.GetType().GetProperty("answerB3",
-                       BindingFlags.GetProperty | BindingFlags.Public | BindingFlags.Instance);
-                propResetAnswerB3.SetValue(parameter, false);
 
-                var propResetAnswerA4 = parameter.GetType().GetProperty("answerA4",
-                       BindingFlags.GetProperty | BindingFlags.Public | BindingFlags.Instance);
-                propResetAnswerA4.SetValue(parameter, false);
+                        if (countto == sort.Count)
+                        {
+                            vmsort.ContentButton = "Результат";
+                        }
 
-                var propResetAnswerB4 = parameter.GetType().GetProperty("answerB4",
-                       BindingFlags.GetProperty | BindingFlags.Public | BindingFlags.Instance);
-                propResetAnswerB4.SetValue(parameter, false);
+                        
+                    }
+                    else
+                    {
 
-                var propResetAnswerA5 = parameter.GetType().GetProperty("answerA5",
-                       BindingFlags.GetProperty | BindingFlags.Public | BindingFlags.Instance);
-                propResetAnswerA5.SetValue(parameter, false);
+                        vmsort.GridVisibility = "Collapsed";
+                        vmsort.ResultVisibility = "Visible";
+                        vmsort.ContentButton = "Выход";
+                        GetResult res = new GetResult();
 
-                var propResetAnswerB5 = parameter.GetType().GetProperty("answerB5",
-                       BindingFlags.GetProperty | BindingFlags.Public | BindingFlags.Instance);
-                propResetAnswerB5.SetValue(parameter, false);
-                #endregion
-
-                #region DoPropertyChanged
-                var meth = parameter.GetType().GetMethod("DoPropertyChanged");
-
-                if (meth != null)
-                {
-
-                    object[] parRadioButtonA1 = new object[] { "answerA1" };
-                    meth.Invoke(parameter, parRadioButtonA1);
-                    object[] parRadioButtonA2 = new object[] { "answerA2" };
-                    meth.Invoke(parameter, parRadioButtonA2);
-                    object[] parRadioButtonA3 = new object[] { "answerA3" };
-                    meth.Invoke(parameter, parRadioButtonA3);
-                    object[] parRadioButtonA4 = new object[] { "answerA4" };
-                    meth.Invoke(parameter, parRadioButtonA4);
-                    object[] parRadioButtonA5 = new object[] { "answerA5" };
-                    meth.Invoke(parameter, parRadioButtonA5);
-                    object[] parRadioButtonB1 = new object[] { "answerB1" };
-                    meth.Invoke(parameter, parRadioButtonB1);
-                    object[] parRadioButtonB2 = new object[] { "answerB2" };
-                    meth.Invoke(parameter, parRadioButtonB2);
-                    object[] parRadioButtonB3 = new object[] { "answerB3" };
-                    meth.Invoke(parameter, parRadioButtonB3);
-                    object[] parRadioButtonB4 = new object[] { "answerB4" };
-                    meth.Invoke(parameter, parRadioButtonB4);
-                    object[] parRadioButtonB5 = new object[] { "answerB5" };
-                    meth.Invoke(parameter, parRadioButtonB5);
-                    object[] parContent = new object[] { "ContentButton" };
-                    meth.Invoke(parameter, parContent);
-                    object[] parVisibility = new object[] { "GridVisibility" };
-                    meth.Invoke(parameter, parVisibility);
-                    object[] parVisibilityResult = new object[] { "ResultVisibility" };
-                    meth.Invoke(parameter, parVisibilityResult);
-                    object[] parSort = new object[] { "SortQuestion" };
-                    meth.Invoke(parameter, parSort);
-                }
-                #endregion
-                if (vmsort.ContentButton == "Выход")
-                {
-                    GetResult res = new GetResult();
-                   
+                    }
+                    
                 }
             }
-        }
 
-        
+            #region DoPropertyChanged
+            var prop = parameter.GetType().GetProperty("SortQuestion",
+                    BindingFlags.GetProperty | BindingFlags.Public | BindingFlags.Instance);
+            prop.SetValue(parameter, SortQuestion);
+            var meth = parameter.GetType().GetMethod("DoPropertyChanged");
+
+            if (meth != null)
+            {
+
+                //object[] parContent = new object[] { "ContentButton" };
+                //meth.Invoke(parameter, parContent);
+                //object[] parVisibility = new object[] { "GridVisibility" };
+                //meth.Invoke(parameter, parVisibility);
+                //object[] parVisibilityResult = new object[] { "ResultVisibility" };
+                //meth.Invoke(parameter, parVisibilityResult);
+                object[] parSort = new object[] { "SortQuestion" };
+                meth.Invoke(parameter, parSort);
+            }
+            #endregion
+        }
         public event EventHandler CanExecuteChanged;
 
     }
 }
-
