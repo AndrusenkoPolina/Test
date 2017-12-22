@@ -120,9 +120,11 @@ namespace Test
                         vmsort.ResultVisibility = "Visible";
                         vmsort.ContentButton = "Выход";
                         GetResult gr = new GetResult();
+                        List<object> listObj = new List<object>();
                         Result res = new Result();
-                        res = gr.getResult();
-
+                        listObj= gr.getResult();
+                        res = (Result)listObj[0];
+                        vmsort.forWord = listObj;
                         var propResult = parameter.GetType().GetProperty("Result",
                   BindingFlags.GetProperty | BindingFlags.Public | BindingFlags.Instance);
                         propResult.SetValue(parameter, res);

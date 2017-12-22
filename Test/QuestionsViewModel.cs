@@ -46,7 +46,8 @@ namespace Test
         public ICommand ChooseQuestion { get; set; }
         public static List<bool> answers { get; set; }
         public Result result { get; set; }
-
+        public List<object> forWord { get; set; }
+        public ICommand Word { get; set; }
         private bool answerA1 { get; set; }
         private bool answerB1 { get; set; }
         private bool answerA2 { get; set; }
@@ -207,6 +208,7 @@ namespace Test
         {
 
             ChooseQuestion = new OutputCommand();
+            Word = new WordCommand();
 
             Config cnf = new Config();
             cnf.DataPath = "Server=LENOVO-PC\\POLINA;Database=Question;Trusted_Connection=True;";

@@ -107,7 +107,7 @@ namespace Test
 
         }
         #endregion
-        public Result getResult()
+        public List<object> getResult()
         {
            
             List<bool> answers = new List<bool>();
@@ -122,7 +122,8 @@ namespace Test
             Logic lg = new Logic(cnf, "Result", res[0].ToString());
             Result Output = new Result();
             Output = lg.Result;
-            return Output;
+            res[0] = Output;
+            return res;
 
         }
 

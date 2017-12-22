@@ -15,7 +15,7 @@ namespace Test
     {
         private void Application_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
         {
-            MessageBox.Show("Что-то пошло не так..." + e.Exception.Message, "Exeption Sample", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show("Что-то пошло не так..." + e.Exception.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
         }
         
     }
