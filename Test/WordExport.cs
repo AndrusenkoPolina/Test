@@ -12,6 +12,7 @@ namespace Test
     public class WordExport
     {
        
+        //REVIEW: Вынести в настройки
         private readonly string TemplateFileName = @"C:\Users\Полина\Desktop\Курсовая работа\Test\Отчёт.docx";
 
         public void GetWord(List<object> result)
@@ -59,6 +60,7 @@ namespace Test
         }
         private void ReplaceWordStub(string stubToReplace, string text, Word.Document wordDocument)
         {
+            //REVIEW: Проверить на null
             var range = wordDocument.Content;//диапозон поиска(весь текст)
             range.Find.ClearFormatting(); //Отчистка поисков до этого совершённых
             range.Find.Execute(FindText: stubToReplace, ReplaceWith: text);//Выбираем нужные параметры: то что мы хотим найти и то, чем заменить.

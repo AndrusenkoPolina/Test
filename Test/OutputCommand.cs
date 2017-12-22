@@ -15,7 +15,7 @@ namespace Test
 
     public class OutputCommand : ICommand
     {
-       
+
         public bool CanExecute(object parameter)
         {
             return true;
@@ -23,18 +23,20 @@ namespace Test
 
         public void Execute(object parameter)
         {
-          
+
             if (parameter == null)
                 throw new ArgumentNullException("Модель представления не может быть null!");
-            
+
             var vmsort = parameter as QuestionsViewModel;
             ObservableCollection<Question> SortQuestion = new ObservableCollection<Question>();
             var sort = vmsort.Questions;
             const int COUNT = 5;
 
+            //REVIEW: Так на пустую строку не проверяют
             if (vmsort.ContentButton == "")
                 throw new ArgumentNullException("Кнопка должна содержать Content");
 
+            //REVIEW:Строки сравниваются через String.Equals
             if (vmsort.ContentButton == "Начать тест")
             {
                 vmsort.ContentButton = "Следующие";
@@ -54,7 +56,7 @@ namespace Test
 
                 if (meth != null)
                 {
-                   
+
                     object[] parSort = new object[] { "SortQuestion" };
                     meth.Invoke(parameter, parSort);
                 }
@@ -76,7 +78,7 @@ namespace Test
                 else
                 {
                     //Добавляем выбранные значение в массив, чтобы потом его использовать в подсчёте результатов
-                  
+
                     QuestionsViewModel.answers.Add(vmsort.AnswerA1);
                     QuestionsViewModel.answers.Add(vmsort.AnswerA2);
                     QuestionsViewModel.answers.Add(vmsort.AnswerA3);
@@ -94,7 +96,7 @@ namespace Test
                     vmsort.AnswerB4 = false;
                     vmsort.AnswerA5 = false;
                     vmsort.AnswerB5 = false;
-                    
+
 
                     //Выдача вопросов по COUNT штук  
                     int countfrom = new int();
@@ -122,9 +124,10 @@ namespace Test
                         GetResult gr = new GetResult();
                         List<object> listObj = new List<object>();
                         Result res = new Result();
-                        listObj= gr.getResult();
+                        listObj = gr.getResult();
                         res = (Result)listObj[0];
                         vmsort.forWord = listObj;
+                        //REVIEW: А если ошибка типа, и у него нет такого свойства?
                         var propResult = parameter.GetType().GetProperty("Result",
                   BindingFlags.GetProperty | BindingFlags.Public | BindingFlags.Instance);
                         propResult.SetValue(parameter, res);
@@ -138,7 +141,8 @@ namespace Test
                             meth2.Invoke(parameter, result);
                         }
                     }
-                        var prop = parameter.GetType().GetProperty("SortQuestion",
+                    //REVIEW:А если нет такого свойства
+                    var prop = parameter.GetType().GetProperty("SortQuestion",
                     BindingFlags.GetProperty | BindingFlags.Public | BindingFlags.Instance);
                     prop.SetValue(parameter, SortQuestion);
                     var meth = parameter.GetType().GetMethod("DoPropertyChanged");
@@ -152,7 +156,7 @@ namespace Test
                 }
             }
 
-            
+
             //#endregion
         }
         public event EventHandler CanExecuteChanged;

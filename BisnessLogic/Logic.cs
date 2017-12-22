@@ -20,8 +20,10 @@ namespace BisnessLogic
             if (action == null)
                 throw new ArgumentNullException();
 
+            //REVIEW: Строки сравниваются через String.Equals
             if (action == "Open")
             {
+
                 DataBaseReader reader = new DataBaseReader();
                 Questions = new List<Question>();
                 foreach (var q in reader.GetQuestion(cnf.DataPath))
@@ -36,6 +38,7 @@ namespace BisnessLogic
 
                 }
             }
+            //REVIEW:Строки сравниваются через String.Equals
             if (action == "Result")
             {
                 DataBaseReader reader = new DataBaseReader();

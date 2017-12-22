@@ -21,6 +21,7 @@ namespace Test
                 throw new ArgumentNullException("Модель представления не может быть null!");
 
             var vmsort = parameter as QuestionsViewModel;
+            //REVIEW:А если тип не совпал?
             if (vmsort.ContentButton == "Выход")
             {
                 WordExport wex = new WordExport();

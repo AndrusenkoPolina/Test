@@ -211,6 +211,7 @@ namespace Test
             Word = new WordCommand();
 
             Config cnf = new Config();
+            //REVIEW: Вынести строку подключения в настройки
             cnf.DataPath = "Server=LENOVO-PC\\POLINA;Database=Question;Trusted_Connection=True;";
 
             Logic lg = new Logic(cnf, "Open", "");
@@ -230,6 +231,7 @@ namespace Test
             }
       
             ContentButton = "Начать тест";
+            //REVIEW: Это надо делать через встроенный в .NET enum
             ResultVisibility = "Collapsed";
             StartVisibility = "Visible";
             GridVisibility = "Collapsed";

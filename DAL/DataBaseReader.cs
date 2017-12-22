@@ -18,19 +18,22 @@ namespace DAL
             List<Question> Questions = new List<Question>();
             if (config == null)
                 throw new ArgumentNullException("Строка подключения пустая");
-             using (SqlConnection connection = new SqlConnection(config))
-                {
+            using (SqlConnection connection = new SqlConnection(config))
+            {
                 try
                 {
                     connection.Open();
                 }
                 catch (Exception ex)
                 {
+                    //REVIEW: Нет смысла просто прокидывать исключение. Хоть залогировать бы
                     throw new Exception("Неверная строка подключения", ex);
                 }
 
+                //REVIEW: То есть, мы глотаем исключение, а потом продолжаем?
                 try
                 {
+                    //REVIEW: Запрос - в константы
                     SqlCommand command = new SqlCommand("select q.id_question, question,answerA,answerB from question q inner join answerAB a ON a.id_question = q.id_question", connection);
                     var questionReader = command.ExecuteReader();
 
@@ -48,6 +51,7 @@ namespace DAL
                 }
                 catch (Exception ex)
                 {
+                    //REVIEW: Залогировать исключение
                     throw new Exception("Неверная команда", ex);
                 }
             }
@@ -66,10 +70,12 @@ namespace DAL
                 {
                     throw new Exception("Неверная строка подключения", ex);
                 }
-                SqlCommand command = new SqlCommand("select * from Result where type ='" +result +"'" , connection);
+                //REVIEW: Опять, глотаем исключение - и?
+                //REVIEW: И что если тут что-то отвалится на ExecuteReader?
+                                SqlCommand command = new SqlCommand("select * from Result where type ='" + result + "'", connection);
                 var ChooseResult = command.ExecuteReader();
                 ChooseResult.Read();
-                
+
                 Result r = new Result();
                 r.id = (int)ChooseResult["id"];
                 r.type = (string)ChooseResult["type"];

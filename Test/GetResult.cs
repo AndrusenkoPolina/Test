@@ -118,6 +118,7 @@ namespace Test
             res = result(answers);
 
             Config cnf = new Config();
+            //REVIEW: В настройки
             cnf.DataPath = "Server=LENOVO-PC\\POLINA;Database=Question;Trusted_Connection=True;";
 
             Logic lg = new Logic(cnf, "Result", res[0].ToString());
