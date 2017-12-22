@@ -19,6 +19,7 @@ namespace Test
         #region вычисление результата
         public List<object> result(List<bool> answers)
         {
+            //Индикаторы нужны для составления подробного отчёта в Word
             int Indicator1 = 0;
             int Indicator2 = 0;
             int Indicator3 = 0;

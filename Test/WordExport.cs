@@ -11,10 +11,15 @@ namespace Test
 {
     public class WordExport
     {
+       
         private readonly string TemplateFileName = @"C:\Users\Полина\Desktop\Курсовая работа\Test\Отчёт.docx";
+
         public void GetWord(List<object> result)
         {
-            var res = (Result)result[0];
+            try
+            {
+
+                var res = (Result)result[0];
                 string type = res.type;
                 string name = res.name;
                 string type_name = type + " " + name;
@@ -23,12 +28,12 @@ namespace Test
                 string Indicator21 = ((int)result[2] * 5).ToString(); ;
                 string Indicator31 = ((int)result[3] * 5).ToString();
                 string Indicator41 = ((int)result[4] * 5).ToString();
+            
             //Оболочка word, которая будет сама по себе создавать себе документ
 
             var wordApp = new Word.Application();
             wordApp.Visible = false; //чтобы в процессе экспорта не видеть перекидывание данныых
-            try
-            {
+           
                 var wordDocument = wordApp.Documents.Open(TemplateFileName); //получаем доступ к файлу
                 ReplaceWordStub("{type_name}", type_name, wordDocument);
                 ReplaceWordStub("{result}", resulttest, wordDocument);
@@ -40,7 +45,13 @@ namespace Test
                 wordDocument.SaveAs(@"C:\Users\Полина\Desktop\Курсовая работа\Test\Результат.docx");
                 wordApp.Visible = true;
             }
-            catch
+            catch (ArgumentNullException ex)
+            {
+                MessageBox.Show("Недопустимый формат результатов");
+            }
+
+           
+            catch (Exception ex )
             {
                 MessageBox.Show("Произошла ошибка");
             }

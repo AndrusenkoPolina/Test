@@ -29,21 +29,27 @@ namespace DAL
                     throw new Exception("Неверная строка подключения", ex);
                 }
 
+                try
+                {
                     SqlCommand command = new SqlCommand("select q.id_question, question,answerA,answerB from question q inner join answerAB a ON a.id_question = q.id_question", connection);
                     var questionReader = command.ExecuteReader();
-                
-                while (questionReader.Read())
-                {
-                    Question q = new Question();
-                    q.id = (int)questionReader["id_question"];
-                    q.question = (string)questionReader["question"];
-                    q.answerA = (string)questionReader["answerA"];
-                    q.answerB = (string)questionReader["answerB"];
-                    Questions.Add(q);
+
+                    while (questionReader.Read())
+                    {
+                        Question q = new Question();
+                        q.id = (int)questionReader["id_question"];
+                        q.question = (string)questionReader["question"];
+                        q.answerA = (string)questionReader["answerA"];
+                        q.answerB = (string)questionReader["answerB"];
+                        Questions.Add(q);
+                    }
+
+                    return Questions;
                 }
-
-                return Questions;
-
+                catch (Exception ex)
+                {
+                    throw new Exception("Неверная команда", ex);
+                }
             }
         }
         public Result GetResult(string config, string result)
