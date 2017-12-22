@@ -26,7 +26,7 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Image Source="Button.png" Grid.Column="0" Style="{StaticResource ImageStyle}">
+            <Image Source="Images/Button.png" Grid.Column="0" Style="{StaticResource ImageStyle}">
                 <Image.ToolTip >
                     <ToolTip Style="{StaticResource TooltipStyle}">
                         <StackPanel Orientation="Vertical">
@@ -40,7 +40,7 @@
             <Button Grid.Column="1" Style="{StaticResource ButtonStyle}" Template="{StaticResource TemplateButton}" Content="{Binding ContentButton}" 
                     Command="{Binding ChooseQuestion}" CommandParameter="{Binding}">
             </Button>
-
+            
             <Button Grid.Column="2" Background="{StaticResource ButtonImageStatisticBrush}" Template="{StaticResource ResourceKey=TemplateButton}"
                     >
                 <Button.ToolTip >
@@ -53,21 +53,22 @@
                 </Button.ToolTip>
             </Button>
         </Grid>
-        <Grid Visibility="{Binding StartVisibility}" Style="{StaticResource GridStyle}">
+        <Grid Visibility="{Binding StartVisibility}" HorizontalAlignment="Center">
             <StackPanel Orientation="Vertical">
-                <TextBlock Style="{StaticResource TextBlockQuestion}" Text="1.Тест занимает менее 12 минут."></TextBlock>
-                <TextBlock Style="{StaticResource TextBlockQuestion}" Text="2.Отвечайте честно (даже если вам не нравиться ответ)."></TextBlock>
-                <Button Width="150" Content="Начать тест" Style="{StaticResource ButtonStyle}"/>
+                <TextBlock Style="{StaticResource TextBlockQuestion}"  Background="LightBlue"  Text="1.Тест занимает менее 12 минут."></TextBlock>
+                <TextBlock Style="{StaticResource TextBlockQuestion}"   Background="LightBlue" Text="2.Отвечайте честно даже если вам не нравиться ответ."></TextBlock>
+                <TextBlock Style="{StaticResource TextBlockQuestion}"   Background="LightBlue" Text="3.Тест даёт возможность для самоанализа."></TextBlock>
             </StackPanel>
         </Grid>
-        <Grid Style="{StaticResource GridStyle}" Visibility="{Binding ResultVisibility}">
+        <Grid Margin="150 20 150 20" Visibility="{Binding ResultVisibility}"  >
             <StackPanel Orientation="Vertical">
-                <StackPanel Style="{StaticResource StackPanelElement}">
-                    <TextBlock Text="{Binding Path=Result.Output.id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBlockQuestion}"/>
-                    <TextBlock Text="{Binding Result.Output.type,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Style="{StaticResource TextBlockQuestion}"/>
-                    <TextBlock Text="{Binding Result.Output.name,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Style="{StaticResource TextBlockQuestion}"/>
+                <StackPanel Orientation="Horizontal" >
+                    <TextBlock Text="Твой тип:"  Style="{StaticResource TextBlockQuestion}" Background="LightBlue" />
+                    <TextBlock Text="{Binding Result.type}"  Style="{StaticResource TextBlockQuestion}" Background="LightBlue"/>
+                    <TextBlock Text="{Binding Result.name}"  Style="{StaticResource TextBlockQuestion}"  Background="LightBlue" />
                 </StackPanel>
-                <TextBlock Text="{Binding Path=Result.Output.result, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBlockAnswer}"  />
+                <TextBlock Text="{Binding Result.result, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextBlockQuestion}" Background="LightBlue" />
+                <Image Grid.Row ="1" Source="Images\cat.png" Stretch="Uniform" Width="600"/>
             </StackPanel>
         </Grid>
         <ScrollViewer>

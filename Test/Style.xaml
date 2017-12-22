@@ -2,16 +2,18 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Test"
                     >
-    
-    <Image x:Key="MainBackground" Source="BackgroundMain.png" Stretch="Fill">
+
+    <Image x:Key="MainBackground" Source="Images\BackgroundMain.png" Stretch="Fill">
     </Image>
-    <ImageBrush x:Key="MainBrush" ImageSource="BackgroundMain.png" Stretch="Fill" >
-    </ImageBrush>
-    <Image x:Key="ButtonImageStatistic" Source="ButtonStatistic.png" Stretch="Uniform">
-    </Image>
-    <ImageBrush x:Key="ButtonImageStatisticBrush" ImageSource="ButtonStatistic.png" Stretch="Uniform" >
+    <ImageBrush x:Key="MainBrush" ImageSource="Images\BackgroundMain.png" Stretch="Fill" >
     </ImageBrush>
 
+    <Image x:Key="ButtonImageStatistic" Source="Images\ButtonStatistic.png" Stretch="Uniform">
+    </Image>
+    <ImageBrush x:Key="ButtonImageStatisticBrush" ImageSource="Images\ButtonStatistic.png" Stretch="Uniform" >
+    </ImageBrush>
+
+    
     <Style x:Key="GridStyle" TargetType="Grid">
         <Setter Property="Background" Value="LightBlue"/>
         <Setter Property="Margin" Value="100 0 100 0"/>

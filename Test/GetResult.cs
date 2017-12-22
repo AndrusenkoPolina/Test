@@ -14,19 +14,7 @@ namespace Test
     public class GetResult : INotifyPropertyChanged
 
     {
-        
-
-        public List<bool> answers { get; set; }
-        private Result output { get; set; }
-        public Result Output
-        {
-            get { return output; }
-            set
-            {
-                output = value;
-                DoPropertyChanged("Output");
-            }
-        }
+  
 
         #region вычисление результата
         public List<object> result(List<bool> answers)
@@ -90,19 +78,19 @@ namespace Test
             }
 
             if (Indicator1 >= 5)
-                result[0] = 'E';
+            { result[0] = 'E'; }
             else result[0] = 'I';
 
-            if (Indicator1 >= 10)
-                result[1] = 'S';
+            if (Indicator2 >= 10)
+            { result[1] = 'S'; }
             else result[1] = 'N';
 
-            if (Indicator1 >= 10)
-                result[2] = 'T';
+            if (Indicator3 >= 10)
+            { result[2] = 'T'; }
             else result[2] = 'F';
 
-            if (Indicator1 >= 10)
-                result[3] = 'J';
+            if (Indicator4 >= 10)
+            { result[3] = 'J'; }
             else result[3] = 'P';
 
             string Result="";
@@ -119,17 +107,11 @@ namespace Test
 
         }
         #endregion
-
-        public GetResult()
+        public Result getResult()
         {
-            try
-            {
-                answers = QuestionsViewModel.answers;
-            }
-            catch (ArgumentNullException ex)
-            {
-                throw new ArgumentNullException("Массив результатов не может быть пустым", ex);
-            }
+           
+            List<bool> answers = new List<bool>();
+            answers = QuestionsViewModel.answers;
 
             List<object> res = new List<object>();
             res = result(answers);
@@ -138,8 +120,10 @@ namespace Test
             cnf.DataPath = "Server=LENOVO-PC\\POLINA;Database=Question;Trusted_Connection=True;";
 
             Logic lg = new Logic(cnf, "Result", res[0].ToString());
-            output = lg.Result;
-           
+            Result Output = new Result();
+            Output = lg.Result;
+            return Output;
+
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

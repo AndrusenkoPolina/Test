@@ -42,10 +42,11 @@ namespace Test
         private string сontentButton { get; set; }
         private string startVisibility { get; set; }
         public int count { get; set; }
-        public string ResultVisibility { get; set; }
+        private string resultVisibility { get; set; }
         public ICommand ChooseQuestion { get; set; }
         public static List<bool> answers { get; set; }
-        private GetResult result { get; set; }
+        public Result result { get; set; }
+
         private bool answerA1 { get; set; }
         private bool answerB1 { get; set; }
         private bool answerA2 { get; set; }
@@ -171,6 +172,17 @@ namespace Test
                 DoPropertyChanged("StartVisibility");
             }
         }
+
+        public string ResultVisibility
+        {
+            get { return resultVisibility; }
+            set
+            {
+                resultVisibility = value;
+                DoPropertyChanged("ResultVisibility");
+            }
+        }
+
         public string GridVisibility
         {
             get { return gridVisibility; }
@@ -180,7 +192,7 @@ namespace Test
                 DoPropertyChanged("GridVisibility");
             }
         }
-        public GetResult Result
+        public Result Result
         {
             get { return result; }
             set
@@ -195,6 +207,7 @@ namespace Test
         {
 
             ChooseQuestion = new OutputCommand();
+
             Config cnf = new Config();
             cnf.DataPath = "Server=LENOVO-PC\\POLINA;Database=Question;Trusted_Connection=True;";
 
@@ -219,7 +232,9 @@ namespace Test
             StartVisibility = "Visible";
             GridVisibility = "Collapsed";
             answers = new List<bool>();
-            Result = new GetResult();
+
+
+
 
         }
             

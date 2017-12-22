@@ -104,13 +104,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Button.png" />
+    <Resource Include="Images\Button.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="BackgroundMain.png" />
+    <Resource Include="Images\BackgroundMain.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="ButtonStatistic.png" />
+    <Resource Include="Images\ButtonStatistic.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BisnessLogic\BisnessLogic.csproj">
@@ -125,6 +125,9 @@
       <Project>{19e7a32e-aa1f-4d48-a9e7-6c9c4b502d36}</Project>
       <Name>DTO</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\cat.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
