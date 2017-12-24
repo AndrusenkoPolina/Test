@@ -211,7 +211,8 @@ namespace Test
             Word = new WordCommand();
 
             Config cnf = new Config();
-            cnf.DataPath = "Server=LENOVO-PC\\POLINA;Database=Question;Trusted_Connection=True;";
+            //Строка подключения вынесена в настройки
+            cnf.DataPath = Test.Properties.Settings.Default.Connect_Database;
 
             Logic lg = new Logic(cnf, "Open", "");
 
@@ -230,10 +231,13 @@ namespace Test
             }
       
             ContentButton = "Начать тест";
-            ResultVisibility = "Collapsed";
-            StartVisibility = "Visible";
-            GridVisibility = "Collapsed";
+
+            //Исправлено добавление видимости через enum
+            ResultVisibility = Visibility.Collapsed.ToString();
+            StartVisibility = Visibility.Visible.ToString();
+            GridVisibility = Visibility.Collapsed.ToString();
             answers = new List<bool>();
+  
 
 
 

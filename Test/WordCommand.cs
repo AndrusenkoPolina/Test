@@ -21,15 +21,22 @@ namespace Test
                 throw new ArgumentNullException("Модель представления не может быть null!");
 
             var vmsort = parameter as QuestionsViewModel;
-            if (vmsort.ContentButton == "Выход")
-            {
-                WordExport wex = new WordExport();
-                wex.GetWord(vmsort.forWord);
-            }
-            else
-            {
-                MessageBox.Show("Для отчёта требуется пройти тест!");
-            }
+
+            if (vmsort.ContentButton.Equals(typeof(String)))
+                throw new InvalidCastException("Контент кнопки должен иметь тип string");
+
+
+            if (vmsort.ContentButton.Equals("Выход"))
+                {
+                    WordExport wex = new WordExport();
+                    wex.GetWord(vmsort.forWord);
+                }
+
+                else
+                {
+                    MessageBox.Show("Для отчёта требуется пройти тест!");
+                }
+            
         }
         public event EventHandler CanExecuteChanged;
     }

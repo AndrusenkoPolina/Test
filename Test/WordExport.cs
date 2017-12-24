@@ -12,7 +12,8 @@ namespace Test
     public class WordExport
     {
        
-        private readonly string TemplateFileName = @"C:\Users\Полина\Desktop\Курсовая работа\Test\Отчёт.docx";
+        //Добавление строки через настройку
+        private readonly string TemplateFileName = Test.Properties.Settings.Default.Word_connection;
 
         public void GetWord(List<object> result)
         {
@@ -59,9 +60,15 @@ namespace Test
         }
         private void ReplaceWordStub(string stubToReplace, string text, Word.Document wordDocument)
         {
+            
             var range = wordDocument.Content;//диапозон поиска(весь текст)
-            range.Find.ClearFormatting(); //Отчистка поисков до этого совершённых
-            range.Find.Execute(FindText: stubToReplace, ReplaceWith: text);//Выбираем нужные параметры: то что мы хотим найти и то, чем заменить.
-        }
+            if (range == null)
+                throw new ArgumentException("Данные для заполнения документа пустые");
+            else
+            {
+                range.Find.ClearFormatting(); //Отчистка поисков до этого совершённых
+                range.Find.Execute(FindText: stubToReplace, ReplaceWith: text);//Выбираем нужные параметры: то что мы хотим найти и то, чем заменить.
+            }
+            }
     }
 }

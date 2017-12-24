@@ -20,7 +20,8 @@ namespace BisnessLogic
             if (action == null)
                 throw new ArgumentNullException();
 
-            if (action == "Open")
+            //Исправлено везде сравнение строк с помощью string.equals
+            if (action.Equals("Open"))
             {
                 DataBaseReader reader = new DataBaseReader();
                 Questions = new List<Question>();
@@ -36,7 +37,7 @@ namespace BisnessLogic
 
                 }
             }
-            if (action == "Result")
+            if (action.Equals("Result"))
             {
                 DataBaseReader reader = new DataBaseReader();
                 Result = new Result();
