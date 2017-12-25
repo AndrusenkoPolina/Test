@@ -19,21 +19,30 @@ namespace DAL
 
             List<Question> Questions = new List<Question>();
 
-            try
+            if (config == null)
+                throw new ArgumentNullException("Строка подключения пустая");
+
+            using (SqlConnection connection = new SqlConnection(config))
             {
-                if (config == null)
-                    throw new ArgumentNullException("Строка подключения пустая");
 
-                using (SqlConnection connection = new SqlConnection(config))
+                try
                 {
-
                     connection.Open();
+                }
+                catch
+                {
+                    logger.Log.Error("Неверная строка подключения к базе данных!");
+                }
 
-                    //Добавление запроса в константы
-                    const string COMMAND = "select q.id_question, question,answerA,answerB from question q inner join answerAB a ON a.id_question = q.id_question";
 
+                //Добавление запроса в константы
+                const string COMMAND = "select q.id_question, question,answerA,answerB from question q inner join answerAB a ON a.id_question = q.id_question";
+
+                try
+                {
                     SqlCommand command = new SqlCommand(COMMAND, connection);
                     var questionReader = command.ExecuteReader();
+
 
 
 
@@ -45,17 +54,19 @@ namespace DAL
                         q.answerA = (string)questionReader["answerA"];
                         q.answerB = (string)questionReader["answerB"];
                         Questions.Add(q);
+
+
                     }
-
                 }
+                catch
+                {
+                    logger.Log.Error("Неверная команда sql");
+                }
+                return Questions;
+
             }
 
-            catch (SqlException)
-            {
-                MessageBox.Show("При отправке данных в базу данных произошла ошибка!", "Данные не были отправлены", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
-                return Questions;
-            }
+        }
 
 
 

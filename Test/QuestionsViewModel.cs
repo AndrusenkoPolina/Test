@@ -232,15 +232,14 @@ namespace Test
       
             ContentButton = "Начать тест";
 
+
             //Исправлено добавление видимости через enum
             ResultVisibility = Visibility.Collapsed.ToString();
             StartVisibility = Visibility.Visible.ToString();
             GridVisibility = Visibility.Collapsed.ToString();
             answers = new List<bool>();
-  
 
-
-
+            
 
         }
             
